@@ -1,7 +1,7 @@
 # TEST-02
 
 ## Description :
-Test du cluster de 4 VM de distribution différentes
+Test du cluster de VM de distributions Linux différentes
 - Lancement de 4 VM Rocky, Debian, OpenSUSE et Ubuntu
 
 Screenshot :
