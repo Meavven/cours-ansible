@@ -148,4 +148,4 @@ Ensuite installez ansible avec pip et verifiez l'installation
 ![image](./atelier01-chall3-3.png)
 
 
-L'environnement virtuel peut être désactiver avec la commande "```$ deactivate```"
+L'environnement virtuel peut être désactivé avec la commande "```$ deactivate```"
