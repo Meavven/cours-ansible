@@ -57,6 +57,8 @@ vagrant@ubuntu~$ exit
 
 ## Challenge n°2
 
+Reprenez le début de la procédure du challenge n°1 et poir recréez une VM et mettre à jour les repository.
+
 Ajout de PPA Ansible (Personal Package Archive)
 
 ```console
@@ -70,3 +72,63 @@ vagrant@ubuntu~$ sudo apt-add-repository --yes --update ppa:ansible/ansible
 ```console
 vagrant@ubuntu~$ sudo apt install ansible
 ```
+
+```console
+vagrant@ubuntu~$ ansible --version
+
+    ansible [core 2.17.14]
+    ...
+```
+
+On peut remarquer que la version de ansible ici est moins récente que celle du package du repository standard utilisé dans le challenge précédent.
+
+Déconnectez-vous et supprimez de nouveau la VM.
+
+```console
+vagrant@ubuntu~$ exit
+[user@sandbox:atelier-1] -f ubuntu
+```
+
+
+## Challenge n°3
+
+Lancez avant tout une VM rocky et connectez-vous
+
+```console
+[user@sandbox:atelier-1] vagrant up rocky
+[user@sandbox:atelier-1] vagrant ssh rocky
+vagrant@rocky~$
+```
+
+Puis installez le package python3-pip et python3 qui inclus le package nécessaires de venv
+
+```console
+vagrant@rocky~$ sudo dnf install -y python3 python3-pip
+```
+
+Initialisez l'environnement de venv et lancez-le
+
+```console
+vagrant@rocky~$ python3 -m venv ~/.venv/ansible
+vagrant@rocky~$ source ~/.venv/ansible/bin/activate
+```
+
+A présent, mettez à jour pip
+
+```console
+(ansible) $ pip install --upgrade pip
+```
+
+Ensuite installez ansible avec pip et verifiez l'installation
+
+```console
+(ansible) $ pip install ansible
+```
+
+```console
+(ansible) $ ansible --version
+    ansible [core 2.15.13]
+    ...
+```
+
+L'environnement virtuel peut être désactiver avec la commande "```$ deactivate```"
