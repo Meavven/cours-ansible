@@ -5,13 +5,13 @@
 Démarrez la VM ubuntu depuis le répertoire atelier-01.
 
 ```console
-$ [vagrant@ubuntu:atelier-1] vagrant up ubuntu
+[vagrant@ubuntu:atelier-1] vagrant up ubuntu
 ```
 
 Connectez-vous à cette VM.
 
 ```console
-$ [vagrant@ubuntu:atelier-1] vagrant ssh ubuntu
+[vagrant@ubuntu:atelier-1] vagrant ssh ubuntu
 ```
 
 Rafraîchissez les informations sur les paquets.
@@ -57,3 +57,16 @@ vagrant@ubuntu~$ exit
 
 ## Challenge n°2
 
+Ajout de PPA Ansible (Personal Package Archive)
+
+```console
+vagrant@ubuntu~$ sudo apt-add-repository --yes --update ppa:ansible/ansible
+    ...
+    ansible - Ansible collections for ansible-core
+    ansible-core - Ansible IT Automation
+    ansible-test - Ansible IT Automation
+```
+
+```console
+vagrant@ubuntu~$ sudo apt install ansible
+```
