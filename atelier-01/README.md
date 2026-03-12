@@ -5,14 +5,17 @@
 Démarrez la VM ubuntu depuis le répertoire atelier-01.
 
 ```console
-[vagrant@ubuntu:atelier-1] vagrant up ubuntu
+[user@sandbox:atelier-1] vagrant up ubuntu
 ```
+![image](./atelier01-chall1-1.png)
 
 Connectez-vous à cette VM.
 
 ```console
-[vagrant@ubuntu:atelier-1] vagrant ssh ubuntu
+[user@sandbox:atelier-1] vagrant ssh ubuntu
 ```
+![image](./atelier01-chall1-2.png)
+
 
 Rafraîchissez les informations sur les paquets.
 
@@ -31,6 +34,8 @@ vagrant@ubuntu~$ apt-cache search --names-only ansible
     ansible-mitogen - Fast connection strategy for Ansible
     ...
 ```
+![image](./atelier01-chall1-3.png)
+
 
 Installez le paquet officiel fourni par la distribution.
 
@@ -46,6 +51,7 @@ vagrant@ubuntu~$ ansible --version
     ansible 2.10.8
     ...
 ```
+![image](./atelier01-chall1-4.png)
 
 Déconnectez-vous et supprimez la VM.
 
@@ -63,11 +69,19 @@ Ajout de PPA Ansible (Personal Package Archive)
 
 ```console
 vagrant@ubuntu~$ sudo apt-add-repository --yes --update ppa:ansible/ansible
+```
+![image](./atelier01-chall2-1.png)
+
+
+```console
+vagrant@ubuntu~$ apt-cache search --names-only ansible
     ...
     ansible - Ansible collections for ansible-core
     ansible-core - Ansible IT Automation
     ansible-test - Ansible IT Automation
 ```
+![image](./atelier01-chall2-2.png)
+
 
 ```console
 vagrant@ubuntu~$ sudo apt install ansible
@@ -92,13 +106,14 @@ vagrant@ubuntu~$ exit
 
 ## Challenge n°3
 
-Lancez avant tout une VM rocky et connectez-vous
+Lancez avant tout, lancez une VM rocky et connectez-vous
 
 ```console
 [user@sandbox:atelier-1] vagrant up rocky
 [user@sandbox:atelier-1] vagrant ssh rocky
-vagrant@rocky~$
 ```
+![image](./atelier01-chall3-1.png)
+
 
 Puis installez le package python3-pip et python3 qui inclus le package nécessaires de venv
 
@@ -112,6 +127,8 @@ Initialisez l'environnement de venv et lancez-le
 vagrant@rocky~$ python3 -m venv ~/.venv/ansible
 vagrant@rocky~$ source ~/.venv/ansible/bin/activate
 ```
+![image](./atelier01-chall3-2.png)
+
 
 A présent, mettez à jour pip
 
@@ -127,8 +144,8 @@ Ensuite installez ansible avec pip et verifiez l'installation
 
 ```console
 (ansible) $ ansible --version
-    ansible [core 2.15.13]
-    ...
 ```
+![image](./atelier01-chall3-3.png)
+
 
 L'environnement virtuel peut être désactiver avec la commande "```$ deactivate```"
