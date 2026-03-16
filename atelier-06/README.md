@@ -25,6 +25,6 @@ Verifier que le fichier de configuration est bien pris en compte avec la command
 vagrant@control:~$ ansible --version
 ```
 
-La commande nous retourne le bon chemin vers le nouveau fichier de configuration ansible.cfg créé à l'instant : _/home/vagrant/monprojet/ansible.cgf_
+La commande nous retourne le bon chemin vers le nouveau fichier de configuration ansible.cfg créé à l'instant : _config file=/home/vagrant/monprojet/ansible.cgf_
 
 ![image](./atelier06-2.png)
