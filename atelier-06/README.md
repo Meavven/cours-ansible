@@ -117,7 +117,7 @@ vagrant@control:~$ ansible all --list-hosts
 
 L'objectif est d'élever les privilèges de l'utilsiateur ```vagrant``` pour la VM "control" afin qu'elle puisse élargir ses droits d'execution de commandes sur les VM target
 
-Ajouter le paramètre "_ansible_become=yes_" dans les variables du fichier inventory "_hosts_" :
+> Ajouter le paramètre "_ansible_become=yes_" dans les variables du fichier inventory "_hosts_" :
 
 ```txt
 [testlab]
@@ -127,4 +127,14 @@ Ajouter le paramètre "_ansible_become=yes_" dans les variables du fichier inven
 ...
 ansible_become=yes
 ```
+Verification de l'élevation des privilèges en executant une commande pour afficher le ficheir ```/etc/shadow``` des VM target
+
+```console
+vagrant@control:~$ ansible all -a "head -n 1 /etc/shadow"
+```
+
+![image](./atelier06-3.png)
+
+
+
 
