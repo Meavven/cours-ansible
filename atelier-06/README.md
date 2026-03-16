@@ -9,6 +9,12 @@ Mise à niveau de l'atelier-06 avec la pré-configuration de l'atelier-03 :
 - Installation de ansible sur la VM "control"
 - Ajout des clefs SSH des VM pour pouvoir ping les trois targets à partir de la VM "control" avec le mode ping de ansible
 
+Verification de la pré-configuration avec la commande suivante utilisant le mode _ping_ de ansible :
+```console
+vagrant@control:~$ ansible all -i target01,target02,target3 -m ping
+```
+
+
 ![image](./atelier06-1.png)
 
 
