@@ -37,7 +37,7 @@ La commande nous retourne le bon chemin vers le nouveau fichier de configuration
 
 ### Configuration de l'inventory
 
-Configuration de ansible.cfg
+Configuration de "_ansible.cfg_"
 
 ```txt
 [defaults]
