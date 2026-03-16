@@ -64,3 +64,30 @@ Vérification du bon fonctionnement de la configuration avec un ping de l'invent
 ```console
 vagrant@control:~$ ansible hosts -m ping
 ```
+```txt
+target02 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+target01 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+target03 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+```
+
+Verification facultatif de l'inventaire pour confirmer que les trois hosts sont bien dans le registre de l'inventaire :
+
+```console
+vagrant@control:~$ ansible all --list-hosts
+```
+```txt
+  hosts (3):
+    target01
+    target02
+    target03
+```
+
