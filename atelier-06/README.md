@@ -36,25 +36,46 @@ vagrant@control:~$ ansible --version
 ![image](./atelier06-2.png)
 
 
-### Configuration de l'inventory
+### Pré-configuration de l'inventory
 
-> Configuration de "_ansible.cfg_"  
+> Spécifier dans "_ansible.cfg_" un chemin vers un futur fichier inventory  
 
 ```txt
 [defaults]
-inventory = ./inventory
+inventory = ./hosts
+```
+### Activation des logs
+
+> Ajouter dans "_ansible.cfg_" un chemin vers un futur fichier de log  
+
+```txt
+[defaults]
+inventory = ./hosts
 log_path = ~/journal/ansible.log
 ```
 
-> Création et configuration du fichier "_inventory_"  
+> Créer le chemin ~/journal qui contiendra le fichier de log. Le fichier se créera de lui-même lorsqu'un log sera généré :  
+
+```console
+vagrant@control:~$ mkdir ~/journal
+```
+
+Pour tester la création automatique du fichier de log, on peut générer un simple log en réexecutant un ping de l'inventaire comme précédemment  
+
+
+### Configuration de l'inventory
+
+> Création et configuration du fichier inventory nommé "_hosts_"
+    - Ajout d'un groupe "_testlab_" contenant les trois VM target
+    - Spécification du nom d'utilisateur _vagrant_ des VM target pour la connexion
 
 ```txt
-[hosts]
+[testlab]
 target01
 target02
 target03
 
-[hosts:vars]
+[testlab:vars]
 ansible_python_interpreter=/usr/bin/python3
 ansible_user=vagrant
 ```
@@ -79,7 +100,7 @@ target03 | SUCCESS => {
 }
 ```
 
-> Verification facultatif de l'inventaire pour confirmer que les trois hosts sont bien dans le registre de l'inventaire :  
+> Verification optionnel pour confirmer que les trois hosts sont bien dans le registre de l'inventaire (fichier "_hosts"_) :  
 
 ```console
 vagrant@control:~$ ansible all --list-hosts
@@ -90,18 +111,5 @@ vagrant@control:~$ ansible all --list-hosts
     target02
     target03
 ```
-
-### Activation des logs
-
-> Le chemin vers le fichier de log a déjà été configuré dans "_ansible.cfg_" en amont, il ne reste plus qu'à le créer le chemin ~/journal. Le fichier se créera de lui-même lorsqu'un log sera généré :  
-
-
-
-  
-```console
-vagrant@control:~$ mkdir ~/journal
-```
-
-Pour tester la création automatique du fichier de log, on peut générer un simple log en réexecutant un ping de l'inventaire comme précédemment  
 
 
