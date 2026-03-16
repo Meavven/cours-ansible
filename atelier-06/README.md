@@ -37,7 +37,7 @@ La commande nous retourne le bon chemin vers le nouveau fichier de configuration
 
 ### Configuration de l'inventory
 
-Configuration de "_ansible.cfg_"
+- Configuration de "_ansible.cfg_"
 
 ```txt
 [defaults]
@@ -45,8 +45,9 @@ inventory = ./inventory
 log_path = ~/journal/ansible.log
 ```
 
-Création du fichier "_inventory_"
-Configuration de "_inventory_"
+- Création du fichier "_inventory_"
+
+- Configuration de "_inventory_"
 
 ```txt
 [hosts]
@@ -59,7 +60,7 @@ ansible_python_interpreter=/usr/bin/python3
 ansible_user=vagrant
 ```
 
-Vérification du bon fonctionnement de la configuration avec un ping de l'inventaire (ici nommé "hosts") :
+- Vérification du bon fonctionnement de la configuration avec un ping de l'inventaire (ici nommé "hosts") :
 
 ```console
 vagrant@control:~$ ansible hosts -m ping
@@ -79,7 +80,7 @@ target03 | SUCCESS => {
 }
 ```
 
-Verification facultatif de l'inventaire pour confirmer que les trois hosts sont bien dans le registre de l'inventaire :
+- Verification facultatif de l'inventaire pour confirmer que les trois hosts sont bien dans le registre de l'inventaire :
 
 ```console
 vagrant@control:~$ ansible all --list-hosts
@@ -93,12 +94,12 @@ vagrant@control:~$ ansible all --list-hosts
 
 ### Activation des logs
 
-Le chemin vers le fichier de log a déjà été configuré dans "_ansible.cfg_" en amont, il ne reste plus qu'à le créer le chemin ~/journal. Le fichier se créera de lui-même lorsqu'un log sera généré :
+- Le chemin vers le fichier de log a déjà été configuré dans "_ansible.cfg_" en amont, il ne reste plus qu'à le créer le chemin ~/journal. Le fichier se créera de lui-même lorsqu'un log sera généré :
 
 ```console
 vagrant@control:~$ mkdir ~/journal
 ```
 
-Pour tester la création automatique du fichier de log, on peut générer un simple log en réexecutant un ping de l'inventaire comme précédemment
+- Pour tester la création automatique du fichier de log, on peut générer un simple log en réexecutant un ping de l'inventaire comme précédemment
 
 
