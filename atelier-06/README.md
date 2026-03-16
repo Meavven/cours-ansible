@@ -127,7 +127,7 @@ L'objectif est d'élever les privilèges de l'utilsiateur ```vagrant``` pour la 
 ...
 ansible_become=yes
 ```
-Verification de l'élevation des privilèges en executant une commande pour afficher le ficheir ```/etc/shadow``` des VM target
+Verification de l'élevation des privilèges en executant une commande pour afficher le fichier ```/etc/shadow``` des VM target
 
 ```console
 vagrant@control:~$ ansible all -a "head -n 1 /etc/shadow"
