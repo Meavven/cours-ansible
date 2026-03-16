@@ -99,6 +99,6 @@ Le chemin vers le fichier de log a déjà été configuré dans "_ansible.cfg_" 
 vagrant@control:~$ mkdir ~/journal
 ```
 
-On peut tester sa création en générant un log en réexecutant un ping de l'inventaire comme précédemment
+Pour tester la création automatique du fichier de log, on peut générer un simple log en réexecutant un ping de l'inventaire comme précédemment
 
 
