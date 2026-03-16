@@ -50,7 +50,7 @@ inventory = ./hosts
 
 ```txt
 [defaults]
-inventory = ./hosts
+...
 log_path = ~/journal/ansible.log
 ```
 
@@ -112,4 +112,20 @@ vagrant@control:~$ ansible all --list-hosts
     target03
 ```
 
+### Elévation des privilèges de l'utilsiateur ```vargant``` pour la VM control (hôte ansible)
+
+Ajouter le paramètre "_ansible_become=yes_" dans les variables du fichier inventory "_hosts_" :
+
+```txt
+```txt
+[testlab]
+...
+
+[testlab:vars]
+...
+ansible_become=yes
+```
+
+
+```
 
