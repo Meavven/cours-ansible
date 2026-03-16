@@ -42,7 +42,7 @@ Configuration de "_ansible.cfg_"
 ```txt
 [defaults]
 inventory = ./inventory
-log_path = ~/logs/ansible.log
+log_path = ~/journal/ansible.log
 ```
 
 Création du fichier "_inventory_"
@@ -90,4 +90,15 @@ vagrant@control:~$ ansible all --list-hosts
     target02
     target03
 ```
+
+### Activation des logs
+
+Le chemin vers le fichier de log a déjà été configuré dans "_ansible.cfg_" en amont, il ne reste plus qu'à le créer le chemin ~/journal. Le fichier se créera de lui-même lorsqu'un log sera généré :
+
+```console
+vagrant@control:~$ mkdir ~/journal
+```
+
+On peut tester sa création en générant un log en réexecutant un ping de l'inventaire comme précédemment
+
 
