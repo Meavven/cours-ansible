@@ -105,6 +105,7 @@ target03 | SUCCESS => {
 ```console
 vagrant@control:~$ ansible all --list-hosts
 ```
+
 ```txt
   hosts (3):
     target01
@@ -117,15 +118,11 @@ vagrant@control:~$ ansible all --list-hosts
 Ajouter le paramètre "_ansible_become=yes_" dans les variables du fichier inventory "_hosts_" :
 
 ```txt
-```txt
 [testlab]
 ...
 
 [testlab:vars]
 ...
 ansible_become=yes
-```
-
-
 ```
 
