@@ -113,7 +113,9 @@ vagrant@control:~$ ansible all --list-hosts
     target03
 ```
 
-### Elévation des privilèges de l'utilsiateur ```vargant``` pour la VM control (hôte ansible)
+### Elévation des privilèges de "vagrant"
+
+L'objectif est d'élever les privilèges de l'utilsiateur ```vagrant``` pour la VM "control" afin qu'elle puisse élargir ses droits d'execution de commandes sur les VM target
 
 Ajouter le paramètre "_ansible_become=yes_" dans les variables du fichier inventory "_hosts_" :
 
