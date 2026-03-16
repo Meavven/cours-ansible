@@ -39,7 +39,7 @@ La commande nous retourne le bon chemin vers le nouveau fichier de configuration
 
 Configuration de ansible.cfg
 
-```conf
+```txt
 [defaults]
 inventory = ./inventory
 log_path = ~/logs/ansible.log
@@ -48,7 +48,7 @@ log_path = ~/logs/ansible.log
 Création du fichier "_inventory_"
 Configuration de "_inventory_"
 
-```conf
+```txt
 [hosts]
 target01
 target02
