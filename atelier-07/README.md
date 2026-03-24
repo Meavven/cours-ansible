@@ -160,3 +160,31 @@ rocky | SUCCESS => {
     "state": "absent"
 }
 ```
+
+Nous pouvons finir en collectant l'information de l'espace utilisés sur les partitions de toutes nos VM avec le mode "command" utilisé au début du challenge :
+
+```console
+[vagrant@ansible ema]$ ansible all -m command -a "df -h /"
+debian | CHANGED | rc=0 >>
+Filesystem                       Size  Used Avail Use% Mounted on
+/dev/mapper/debian--12--vg-root   62G  1.7G   57G   3% /
+rocky | CHANGED | rc=0 >>
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda2        61G  2.1G   59G   4% /
+suse | CHANGED | rc=0 >>
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda3        64G  2.4G   58G   4% /
+[vagrant@ansible ema]$ ansible all -m command -a "df -h /"
+debian | CHANGED | rc=0 >>
+Filesystem                       Size  Used Avail Use% Mounted on
+/dev/mapper/debian--12--vg-root   62G  1.7G   57G   3% /
+suse | CHANGED | rc=0 >>
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda3        64G  2.4G   58G   4% /
+rocky | CHANGED | rc=0 >>
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda2        61G  2.1G   59G   4% /
+```
+
+Pour conclure ce challenge, on remarque que, malgré que ce soit la même commande qui est executé successivement, ansible retourne qu'il y a un changement à chaque fois car il s'agit d'une commande bash. Ansible ne peut pas savoir s'il y a un changement contrairement à tout à l'heure où il appliquait des modifications de lui-même. Il pouvait donc facilement savoir s'il executait deux fois la même modification (en ajoutant/supprimer un fichier, installant/désinstallant un packages, etc.).
+
