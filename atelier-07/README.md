@@ -2,7 +2,7 @@
 
 ## Challenge
 
-> ==Lancez les 4 VM et connectez-vous à la VM ```Control Host```
+> Lancez les 4 VM et connectez-vous à la VM ```Control Host```
 
 ```console
 [vagrant@ubuntu:atelier-7] vagrant up
@@ -43,7 +43,7 @@ rocky | SUCCESS => {
 }
 ```
 
-> Les trois packages se sont bien installés. On peut désormais les désinstaller.
+Les trois packages se sont bien installés. On peut désormais les désinstaller.
 
 > Nous pouvons tester d'executer deux fois successivement la commande de désinstallation. Le terminal nous retourne qu'il n'y a eu aucun changement étant donné que les packages ont déjà été désinstallés lors de la première execution de commande.
 
