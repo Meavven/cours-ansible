@@ -16,7 +16,8 @@ vagrant@control:~$
 vagrant@control:~$ ansible all -m package -a "name=tree,git,nmap state=present)"
 ```
 > Le paramètre ```state=present``` permet ici de préciser que nous voulons "installer" les packages mentionnés. Les désinstaller aurait nécessité la valeur de ```state=absent```.
-
+> Si on ne précise pas ce paramètre, il sera par défaut avec la valeur ```state=present```
+> 
 ```console
 [vagrant@ansible ema]$ ansible all -m package -a "name=tree,git,nmap"
 suse | SUCCESS => {
@@ -45,10 +46,14 @@ rocky | SUCCESS => {
 
 Les trois packages se sont bien installés. On peut désormais les désinstaller.
 
-> Nous pouvons tester d'executer deux fois successivement la commande de désinstallation. Le terminal nous retourne qu'il n'y a eu aucun changement étant donné que les packages ont déjà été désinstallés lors de la première execution de commande.
+> Nous pouvons tester d'executer deux fois successivement la commande de désinstallation afin de confirmer que la désinstallati on s'est terminée avec succès.
+> Le terminal nous retourne qu'il n'y a eu aucun changement étant donné que les packages ont bien été désinstallés lors de la première execution de commande.
 
 ```console
-[vagrant@ansible ema]$ ansible all -m package -a "name=tree,git,nmap"
+[vagrant@ansible ema]$ ansible all -m package -a "name=tree,git,nmap state=absent"
+debian | SUCCESS => {
+    "changed": false
+}
 suse | SUCCESS => {
     "changed": false,
     "name": [
@@ -57,13 +62,8 @@ suse | SUCCESS => {
         "nmap"
     ],
     "rc": 0,
-    "state": "present",
+    "state": "absent",
     "update_cache": false
-}
-debian | SUCCESS => {
-    "cache_update_time": 1761245363,
-    "cache_updated": false,
-    "changed": false
 }
 rocky | SUCCESS => {
     "changed": false,
@@ -72,3 +72,5 @@ rocky | SUCCESS => {
     "results": []
 }
 ```
+
+Les trois packages se sont bel et bien déinstallation. On le confirme par l'information de "changed: false". Aucun changement n'a été executé.
