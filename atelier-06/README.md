@@ -7,9 +7,9 @@
 > Mise à niveau de l'atelier-06 avec la pré-configuration de l'atelier-03 :
 
     - lancement des quatres VM avec vagrant  
-    - Mise à jour du fichier hosts de la VM "control" avec les hostname des trois VM targets  
-    - Installation de ansible sur la VM "control"  
-    - Ajout des clefs SSH des VM pour pouvoir ping les trois targets à partir de la VM "control" avec le mode ping de ansible  
+    - Mise à jour du fichier hosts de la VM ```Control Host``` avec les hostname des trois VM targets  
+    - Installation de ansible sur la VM ```Control Host```  
+    - Ajout des clefs SSH des VM pour pouvoir ping les trois targets à partir de la VM ```Control Host``` avec le mode ping de ansible  
 
 > Verification de la pré-configuration avec la commande suivante sollicitant le mode _ping_ de ansible :  
 ```console
