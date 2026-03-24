@@ -6,15 +6,15 @@
 
 ```console
 [vagrant@ubuntu:atelier-7] vagrant up
-[vagrant@ubuntu:atelier-7] vagrant ssh control
-vagrant@control:~$ 
+[vagrant@ubuntu:atelier-7] vagrant ssh ansible
+vagrant@ansible:~$ 
 ```
 
 ### Installer / Désinstaller des packages sur les VM depuis le Target Host
 > Installez successivement les 3 packages avec une commande _ad hoc_ depuis la VM ```Control Host``` :
 
 ```console
-vagrant@control:~$ ansible all -m package -a "name=tree,git,nmap state=present)"
+vagrant@ansible:~$ ansible all -m package -a "name=tree,git,nmap state=present)"
 ```
 > Le paramètre ```state=present``` permet ici de préciser que nous voulons "installer" les packages mentionnés. Les désinstaller aurait nécessité la valeur de ```state=absent```.
 > Si on ne précise pas ce paramètre, il sera par défaut avec la valeur ```state=present```
@@ -51,7 +51,7 @@ Les trois packages se sont bien installés. On peut désormais les désinstaller
 > Le terminal nous retourne qu'il n'y a eu aucun changement étant donné que les packages ont bien été désinstallés lors de la première execution de commande.
 
 ```console
-[vagrant@ansible ema]$ ansible all -m package -a "name=tree,git,nmap state=absent"
+[vagrant@ansible]~$ ansible all -m package -a "name=tree,git,nmap state=absent"
 debian | SUCCESS => {
     "changed": false
 }
@@ -81,7 +81,7 @@ Les trois packages se sont bel et bien déinstallation. On le confirme par l'inf
 Créez à présent un fichier "test3.txt" et copiez-le sur toutes les VM en executant (depuis la VM ```Control Host```) la commande ansible utilisant le mode "copy" :
 
 ```console
-[vagrant@ansible ema]$ ansible all -m copy -a "src=/etc/fstab dest=/tmp/test3.txt"
+[vagrant@ansible]~$ ansible all -m copy -a "src=/etc/fstab dest=/tmp/test3.txt"
 suse | SUCCESS => {
     "changed": false,
     "checksum": "0fe1d6fcaf1695fb3ef9d8a42d45d04e5e0c11c2",
@@ -128,7 +128,7 @@ La fichier s'est bien copié sur nos trois VM.
 > Nous pouvons le supprimer en utilisant le mode "file" :
 
 ```console
-[vagrant@ansible ema]$ ansible all -m copy -a "src=/etc/fstab dest=/tmp/test3.txt"
+[vagrant@ansible]~$ ansible all -m copy -a "src=/etc/fstab dest=/tmp/test3.txt"
 debian | CHANGED => {
     "changed": true,
     "path": "/tmp/test3.txt",
@@ -165,7 +165,7 @@ rocky | SUCCESS => {
 Nous pouvons finir en collectant l'information de l'espace utilisés sur les partitions de toutes nos VM avec le mode "command" utilisé au début du challenge :
 
 ```console
-[vagrant@ansible ema]$ ansible all -m command -a "df -h /"
+[vagrant@ansible]~$ ansible all -m command -a "df -h /"
 debian | CHANGED | rc=0 >>
 Filesystem                       Size  Used Avail Use% Mounted on
 /dev/mapper/debian--12--vg-root   62G  1.7G   57G   3% /
