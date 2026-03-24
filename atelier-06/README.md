@@ -11,7 +11,13 @@
     - Installation de ansible sur la VM ```Control Host```  
     - Ajout des clefs SSH des VM pour pouvoir ping les trois targets à partir de la VM ```Control Host``` avec le mode ping de ansible  
 
-> Verification de la pré-configuration avec la commande suivante sollicitant le mode _ping_ de ansible :  
+> Connectez-vous à la Control Host et verifiez la pré-configuration avec la commande suivante sollicitant le mode _ping_ de ansible :
+
+```console
+[vagrant@ubuntu:atelier-7] vagrant up
+[vagrant@ubuntu:atelier-7] vagrant ssh ansible
+vagrant@ansible:~$ 
+```
 ```console
 vagrant@control:~$ ansible all -i target01,target02,target3 -m ping
 ```
