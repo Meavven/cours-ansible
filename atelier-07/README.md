@@ -16,3 +16,5 @@ Installez successivement les 3 packages avec une commande _ad hoc_ depuis la VM 
 vagrant@control:~$ ansible all -m package -a "name=tree,git,nmap state=present)"
 ```
 Le paramètre ```state=present``` permet ici de préciser que nous voulons "installer" les packages mentionnés. Les désinstaller aurait nécessité la valeur de ```state=absent```.
+
+![image](./atelier07-1.png)
