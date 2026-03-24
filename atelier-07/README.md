@@ -2,7 +2,7 @@
 
 ## Challenge
 
-Lancez les 4 VM et connectez-vous à la VM ```Control Host``` (ici de hostname "control")
+Lancez les 4 VM et connectez-vous à la VM ```Control Host```
 
 ```console
 [vagrant@ubuntu:atelier-7] vagrant up
