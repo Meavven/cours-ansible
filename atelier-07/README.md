@@ -13,7 +13,5 @@ vagrant@control:~$
 Installez successivement les 3 packages avec une commande _ad hoc_ depuis la VM ```Control Host``` :
 
 ```console
-vagrant@control:~$ ansible all -m package -a "name=tree"
-vagrant@control:~$ ansible all -m package -a "name=git"
-vagrant@control:~$ ansible all -m package -a "name=nmap"
+vagrant@control:~$ ansible all -m package -a "name=tree,git,nmap state=present)"
 ```
