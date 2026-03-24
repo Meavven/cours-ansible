@@ -5,8 +5,8 @@
 Lancez les 4 VM et connectez-vous à la VM control
 
 ```console
-[vagrant@ubuntu:atelier-3] vagrant up
-[vagrant@ubuntu:atelier-3] vagrant ssh control
+[vagrant@ubuntu:atelier-7] vagrant up
+[vagrant@ubuntu:atelier-7] vagrant ssh control
 vagrant@control:~$ 
 ```
 
