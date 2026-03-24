@@ -10,6 +10,7 @@
 vagrant@control:~$ 
 ```
 
+### Installer / Désinstaller des packages : mode ansible "package"
 > Installez successivement les 3 packages avec une commande _ad hoc_ depuis la VM ```Control Host``` :
 
 ```console
