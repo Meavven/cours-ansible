@@ -2,7 +2,7 @@
 
 ## Objectif
 
-### Challenge n° 1
+#### Challenge n° 1
 
 - Démarrez la VM ubuntu depuis le répertoire atelier-01.
 
@@ -20,7 +20,7 @@
 
 - Déconnectez-vous et supprimez la VM.
 
-### Challenge n° 2
+#### Challenge n° 2
 
 - Répétez le challenge précédent en configurant un dépôt PPA (Personal Package Archive) pour Ansible :
 
@@ -30,12 +30,13 @@ $ sudo apt-add-repository ppa:ansible/ansible
 
 - Notez la version fournie par ce dépôt tiers et comparez avec la version officielle du challenge précédent.
 
-### Challenge n° 3
+#### Challenge n° 3
 
 - Lancez une VM Rocky Linux et installez Ansible en utilisant PIP et Virtualenv.
 
 -------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------
+
+
 ## Challenge n°1
 
 Démarrez la VM ubuntu depuis le répertoire atelier-01.
