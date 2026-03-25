@@ -1,5 +1,16 @@
 # Atelier 10
 
+## Objectif :
+
+Écrivez trois playbooks :
+
+- Un premier playbook apache-debian.yml qui installe Apache sur l'hôte debian avec une page personnalisée Apache web server running on Debian Linux.
+
+- Un deuxième playbook apache-rocky.yml qui installe Apache sur l'hôte rocky avec une page personnalisée Apache web server running on Rocky Linux.
+
+- Un troisième playbook apache-suse.yml qui installe Apache sur l'hôte suse avec une page personnalisée Apache web server running on SUSE Linux.
+
+
 ## Challenge
 
 > Lancez les 4 VM et connectez-vous à la VM ```Control Host```
