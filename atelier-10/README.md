@@ -1,6 +1,6 @@
 # Atelier 10
 
-## Objectif :
+## Objectif
 
 Écrivez trois playbooks :
 
