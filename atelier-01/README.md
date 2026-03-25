@@ -35,6 +35,8 @@ $ sudo apt-add-repository ppa:ansible/ansible
 - Lancez une VM Rocky Linux et installez Ansible en utilisant PIP et Virtualenv.
 
 -------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+=====================================================================================
 ## Challenge n°1
 
 Démarrez la VM ubuntu depuis le répertoire atelier-01.
