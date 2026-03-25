@@ -20,7 +20,9 @@
 
 Voici la configuration à installer :
 
-/etc/chrony.conf
+_/etc/chrony.conf_
+
+```sh
 # /etc/chrony.conf
 server 0.fr.pool.ntp.org iburst
 server 1.fr.pool.ntp.org iburst
@@ -30,6 +32,7 @@ driftfile /var/lib/chrony/drift
 makestep 1.0 3
 rtcsync
 logdir /var/log/chrony
+```
 
 ---
 
