@@ -10,6 +10,7 @@
 
 - Un troisième playbook apache-suse.yml qui installe Apache sur l'hôte suse avec une page personnalisée Apache web server running on SUSE Linux.
 
+---
 
 ## Challenge
 
