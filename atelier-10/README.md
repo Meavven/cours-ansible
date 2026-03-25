@@ -12,9 +12,9 @@ vagrant@ansible:~$
 
 > Création des trois playbook pour les VM Debian, Rocky et SUSE
 
-_playbook-debian.yaml_
+_playbook-apache-debian.yaml_
 ```console
----  # apache-debian.yml
+---  # playbook-apache-debian.yaml
 
 - hosts: debian
 
@@ -53,9 +53,9 @@ _playbook-debian.yaml_
 ```
 ![image](./atelier10-1.png)
 
-_playbook-rocky.yaml_
+_playbook-apache-rocky.yaml_
 ```console
----  # apache-rocky.yml
+---  # playbook-apache-rocky.yaml
 
 - hosts: rocky
 
@@ -94,9 +94,9 @@ _playbook-rocky.yaml_
 
 ![image](./atelier10-2.png)
 
-_playbook-suse.yaml_
+_playbook-apache-suse.yaml_
 ```console
---- #apache-suse.yml
+--- # playbook-apache-suse.yaml
 - hosts: suse
   become: true  # Nécessaire pour l'installation et les services
   tasks:
