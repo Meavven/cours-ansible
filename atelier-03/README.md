@@ -1,5 +1,14 @@
 # Atelier 3
 
+## Objectif
+
+- Faites le nécessaire pour réussir un ping Ansible comme ceci :
+
+```console
+$ ansible all -i target01,target02,target03 -m ping
+```
+    
+
 ## Challenge
 
 Lancez les 4 VM et connectez-vous à la VM control
