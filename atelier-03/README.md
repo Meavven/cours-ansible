@@ -7,7 +7,7 @@
 ```console
 $ ansible all -i target01,target02,target03 -m ping
 ```
----
+-
 
 ## Challenge
 
