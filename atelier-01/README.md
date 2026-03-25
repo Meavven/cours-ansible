@@ -34,7 +34,7 @@ $ sudo apt-add-repository ppa:ansible/ansible
 
 - Lancez une VM Rocky Linux et installez Ansible en utilisant PIP et Virtualenv.
 
--------------------------------------------------------------------------------------
+---
 
 
 ## Challenge n°1
@@ -97,6 +97,7 @@ vagrant@ubuntu~$ exit
 [user@sandbox:atelier-1] -f ubuntu
 ```
 
+---
 
 ## Challenge n°2
 
@@ -140,6 +141,7 @@ vagrant@ubuntu~$ exit
 [user@sandbox:atelier-1] -f ubuntu
 ```
 
+---
 
 ## Challenge n°3
 
