@@ -12,6 +12,7 @@
 
 - Enfin, affichez l'espace utilisé par la partition principale sur tous les Target Hosts. Que remarquez-vous ?
 
+---
 
 ## Challenge
 
