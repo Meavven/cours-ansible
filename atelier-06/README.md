@@ -34,6 +34,7 @@
 
 - Quittez le Control Host et supprimez toutes les VM de l'atelier.  
   
+---
 
 ## Challenge
 
