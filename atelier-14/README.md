@@ -48,9 +48,9 @@ _myvars1.yaml_
 ...
 ```
 
-> Résultat du lancement du playbook myvars1 :
+> Résultat du lancement du playbook myvars1
 
-```sh
+```console
 [vagrant@control playbooks]$ ansible-playbook myvars1.yml 
 
 PLAY [Affichage des véhicules (Play Vars)] ***************************************************************
@@ -136,7 +136,7 @@ _myvars2.yaml_
 
 > Résultat du lancement du playbook myvars2 :
 
-```sh
+```console
 [vagrant@control playbooks]$ ansible-playbook myvars2.yml 
 
 PLAY [Affichage des véhicules (set_fact)] ****************************************************************
