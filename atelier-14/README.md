@@ -28,3 +28,244 @@
 vagrant@ansible:~$ 
 ```
 
+> Création du playbook myvars1 en utilisant les extra vars pour remplacer successivement l'une et l'autre marque - puis les deux à la fois
+
+_myvars1.yaml_
+
+```yaml
+--- # myvars1.yml
+- name: Affichage des véhicules (Play Vars)
+  hosts: all
+  gather_facts: false
+  vars:
+    mycar: Peugeot
+    mybike: Yamaha
+
+  tasks:
+    - name: Afficher les véhicules
+      debug:
+        msg: "Ma voiture : {{ mycar }}, Ma moto : {{ mybike }}"
+...
+```
+
+> Résultat du lancement du playbook myvars1 :
+
+```sh
+[vagrant@control playbooks]$ ansible-playbook myvars1.yml 
+
+PLAY [Affichage des véhicules (Play Vars)] ***************************************************************
+
+TASK [Afficher les véhicules] ****************************************************************************
+ok: [target01] => {
+    "msg": "Ma voiture : Peugeot, Ma moto : Yamaha"
+}
+ok: [target02] => {
+    "msg": "Ma voiture : Peugeot, Ma moto : Yamaha"
+}
+ok: [target03] => {
+    "msg": "Ma voiture : Peugeot, Ma moto : Yamaha"
+}
+
+PLAY RECAP ***********************************************************************************************
+target01                   : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+target02                   : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+target03                   : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+[vagrant@control playbooks]$ ansible-playbook myvars1.yml -e mycar=Ferrari
+
+PLAY [Affichage des véhicules (Play Vars)] ***************************************************************
+
+TASK [Afficher les véhicules] ****************************************************************************
+ok: [target01] => {
+    "msg": "Ma voiture : Ferrari, Ma moto : Yamaha"
+}
+ok: [target03] => {
+    "msg": "Ma voiture : Ferrari, Ma moto : Yamaha"
+}
+ok: [target02] => {
+    "msg": "Ma voiture : Ferrari, Ma moto : Yamaha"
+}
+
+PLAY RECAP ***********************************************************************************************
+target01                   : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+target02                   : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+target03                   : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+[vagrant@control playbooks]$ ansible-playbook myvars1.yml -e mycar=Tesla -e mybike=Ducati
+
+PLAY [Affichage des véhicules (Play Vars)] ***************************************************************
+
+TASK [Afficher les véhicules] ****************************************************************************
+ok: [target01] => {
+    "msg": "Ma voiture : Tesla, Ma moto : Ducati"
+}
+ok: [target02] => {
+    "msg": "Ma voiture : Tesla, Ma moto : Ducati"
+}
+ok: [target03] => {
+    "msg": "Ma voiture : Tesla, Ma moto : Ducati"
+}
+
+PLAY RECAP ***********************************************************************************************
+target01                   : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+target02                   : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+target03                   : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
+> playbook myvars2.yml qui fait essentiellement la même chose que myvars1.yml, mais en utilisant une tâche avec set_fact pour définir les deux variables.
+
+_myvars2.yaml_
+
+```yaml
+-- # myvars2.yml
+- name: Affichage des véhicules (set_fact)
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Définir les variables dynamiquement
+      set_fact:
+        mycar: Renault
+        mybike: Kawasaki
+
+    - name: Afficher les véhicules
+      debug:
+	msg: "Ma voiture : {{ mycar }}, Ma moto : {{ mybike }}"
+...
+```
+
+> Résultat du lancement du playbook myvars2 :
+
+```sh
+[vagrant@control playbooks]$ ansible-playbook myvars2.yml 
+
+PLAY [Affichage des véhicules (set_fact)] ****************************************************************
+
+TASK [Définir les variables dynamiquement] ***************************************************************
+ok: [target01]
+ok: [target02]
+ok: [target03]
+
+TASK [Afficher les véhicules] ****************************************************************************
+ok: [target01] => {
+    "msg": "Ma voiture : Renault, Ma moto : Kawasaki"
+}
+ok: [target03] => {
+    "msg": "Ma voiture : Renault, Ma moto : Kawasaki"
+}
+ok: [target02] => {
+    "msg": "Ma voiture : Renault, Ma moto : Kawasaki"
+}
+
+PLAY RECAP ***********************************************************************************************
+target01                   : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+target02                   : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+target03                   : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+[vagrant@control playbooks]$ ansible-playbook myvars2.yml -e mycar=Ferrari
+
+PLAY [Affichage des véhicules (set_fact)] ****************************************************************
+
+TASK [Définir les variables dynamiquement] ***************************************************************
+ok: [target01]
+ok: [target02]
+ok: [target03]
+
+TASK [Afficher les véhicules] ****************************************************************************
+ok: [target01] => {
+    "msg": "Ma voiture : Ferrari, Ma moto : Kawasaki"
+}
+ok: [target03] => {
+    "msg": "Ma voiture : Ferrari, Ma moto : Kawasaki"
+}
+ok: [target02] => {
+    "msg": "Ma voiture : Ferrari, Ma moto : Kawasaki"
+}
+
+PLAY RECAP ***********************************************************************************************
+target01                   : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+target02                   : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+target03                   : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+[vagrant@control playbooks]$ ansible-playbook myvars2.yml -e mycar=Tesla -e mybike=Ducati
+
+PLAY [Affichage des véhicules (set_fact)] ****************************************************************
+
+TASK [Définir les variables dynamiquement] ***************************************************************
+ok: [target01]
+ok: [target02]
+ok: [target03]
+
+TASK [Afficher les véhicules] ****************************************************************************
+ok: [target01] => {
+    "msg": "Ma voiture : Tesla, Ma moto : Ducati"
+}
+ok: [target02] => {
+    "msg": "Ma voiture : Tesla, Ma moto : Ducati"
+}
+ok: [target03] => {
+    "msg": "Ma voiture : Tesla, Ma moto : Ducati"
+}
+
+PLAY RECAP ***********************************************************************************************
+target01                   : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+target02                   : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+target03                   : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+```
+
+> playbook myvars3.yml qui affiche le contenu des deux variables mycar et mybike mais sans les définir, définissant avant d'être exécuté les variables VW et BMW comme valeurs par défaut pour mycar et mybike pour tous les hôtes, en utilisant l'endroit approprié.
+
+_myvars3.yaml_
+
+```yaml
+-- # myvars3.yml
+- name: Affichage des véhicules (External Vars)
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Afficher les véhicules
+      debug:
+    msg: "Ma voiture : {{ mycar }}, Ma moto : {{ mybike }}"
+...
+```
+
+
+
+> Résultat du lancement du playbook myvars3 :
+
+```console
+[vagrant@control playbooks]$ nano myvars3.yml
+[vagrant@control playbooks]$ mkdir group_vars
+[vagrant@control playbooks]$ cat <<EOF > group_vars/all.yml
+mycar: VW
+mybike: BMW
+EOF
+[vagrant@control playbooks]$ mkdir host_vars
+[vagrant@control playbooks]$ cat <<EOF > host_vars/target02.yml
+mycar: Mercedes
+mybike: Honda
+EOF
+[vagrant@control playbooks]$ ansible-playbook myvars3.yml 
+
+PLAY [Affichage des véhicules (External Vars)] ***********************************************************
+
+TASK [Afficher les véhicules] ****************************************************************************
+ok: [target01] => {
+    "msg": "Ma voiture : VW, Ma moto : BMW"
+}
+ok: [target02] => {
+    "msg": "Ma voiture : Mercedes, Ma moto : Honda"
+}
+ok: [target03] => {
+    "msg": "Ma voiture : VW, Ma moto : BMW"
+}
+
+PLAY RECAP ***********************************************************************************************
+target01                   : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+target02                   : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+target03                   : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+[vagrant@control playbooks]$
+```
