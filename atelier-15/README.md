@@ -15,9 +15,10 @@
 > Lancez les 4 VM et connectez-vous à la VM ```Control Host```
 
 ---
-### Création du playbook ```kernel.yaml``` pour afficher les infos détaillées du noyau sur tous les ```Target Hosts```
+### Paybook ```kernel.yaml``` 
+Il affichera les infos détaillées du noyau sur tous les ```Target Hosts```
 
-kernel.yml
+_kernel.yml_
 
 ```yaml
 ---  # kernel.yml
@@ -67,7 +68,8 @@ suse                       : ok=2    changed=0    unreachable=0    failed=0    s
 ```
 
 ---
-### Même principe mais en utilisant le paramètre ```var``` du module ```debug```
+### Principe similaire
+Il utilisera cette fois-ci le paramètre ```var``` du module ```debug```
 
 _kernel_var.yml_
 
@@ -116,7 +118,8 @@ suse                       : ok=2    changed=0    unreachable=0    failed=0    s
 ```
 
 ---
-### playbook packages.yml qui affiche le nombre total de paquets RPM installés sur les hôtes rocky et suse (Nous utiliserons la commande ```rpm -qa | wc -l```)
+### Playbook packages.yml
+Il affichera le nombre total de paquets RPM installés sur les hôtes rocky et suse (Nous utiliserons la commande ```rpm -qa | wc -l```)
 
 _package.yml_
 
