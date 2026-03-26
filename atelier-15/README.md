@@ -42,7 +42,7 @@ vagrant@ansible:~$
 
 > Résultat du lancement du playbook ```kernel.yaml```
 
-```sh
+```console
 [vagrant@ansible playbooks]$ ansible-playbook kernel.yml 
 
 PLAY [Affichage des infos noyau (msg)] *******************************************************************
