@@ -22,7 +22,7 @@
 
 > Lancez les 4 VM et connectez-vous à la VM ```Control Host```
 
-> Création du playbook myvars1 en utilisant les extra vars pour remplacer successivement l'une et l'autre marque - puis les deux à la fois
+#### Création du playbook myvars1 en utilisant les extra vars pour remplacer successivement l'une et l'autre marque - puis les deux à la fois
 
 _myvars1.yaml_
 
@@ -106,7 +106,7 @@ target02                   : ok=1    changed=0    unreachable=0    failed=0    s
 target03                   : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
-> playbook myvars2.yml qui fait essentiellement la même chose que myvars1.yml, mais en utilisant une tâche avec set_fact pour définir les deux variables.
+#### playbook myvars2.yml qui fait essentiellement la même chose que myvars1.yml, mais en utilisant une tâche avec set_fact pour définir les deux variables.
 
 _myvars2.yaml_
 
@@ -208,7 +208,7 @@ target03                   : ok=2    changed=0    unreachable=0    failed=0    s
 
 ```
 
-> playbook myvars3.yml qui affiche le contenu des deux variables mycar et mybike mais sans les définir, définissant avant d'être exécuté les variables VW et BMW comme valeurs par défaut pour mycar et mybike pour tous les hôtes, en utilisant l'endroit approprié.
+#### playbook myvars3.yml qui affiche le contenu des deux variables mycar et mybike mais sans les définir, définissant avant d'être exécuté les variables VW et BMW comme valeurs par défaut pour mycar et mybike pour tous les hôtes, en utilisant l'endroit approprié.
 
 _myvars3.yaml_
 
@@ -270,7 +270,7 @@ target03                   : ok=1    changed=0    unreachable=0    failed=0    s
 ```
 
 
-> playbook display_user.yml qui affiche un utilisateur et son mot de passe correspondant à l'aide des variables user et password. Ces deux variables seront saisies de manière interactive pendant l'exécution du playbook. Les valeurs par défaut seront microlinux pour user et yatahongaga pour password. Le mot de passe ne sera pas s'affichéc pendant la saisie.
+#### playbook display_user.yml qui affiche un utilisateur et son mot de passe correspondant à l'aide des variables user et password. Ces deux variables seront saisies de manière interactive pendant l'exécution du playbook. Les valeurs par défaut seront microlinux pour user et yatahongaga pour password. Le mot de passe ne sera pas s'affichéc pendant la saisie.
 
 _display_users.yaml_
 
