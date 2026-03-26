@@ -6,7 +6,7 @@
 
 Voici la configuration qu'il faudra installer sur chacune des quatre cibles :
 
-\# chrony.conf :\n
+\# _chrony.conf_ :
 ```sh
 server 0.fr.pool.ntp.org iburst
 server 1.fr.pool.ntp.org iburst
