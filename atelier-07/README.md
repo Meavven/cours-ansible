@@ -18,12 +18,6 @@
 
 > Lancez les 4 VM et connectez-vous à la VM ```Control Host```
 
-```console
-[vagrant@ubuntu:atelier-7] vagrant up
-[vagrant@ubuntu:atelier-7] vagrant ssh ansible
-vagrant@ansible:~$ 
-```
-
 ### Installer / Désinstaller des packages sur les VM depuis le Control Host
 > Installez successivement les 3 packages avec une commande _ad hoc_ depuis la VM ```Control Host``` :
 
