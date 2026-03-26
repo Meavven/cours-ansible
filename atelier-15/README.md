@@ -14,12 +14,6 @@
 
 > Lancez les 4 VM et connectez-vous à la VM ```Control Host```
 
-```console
-[vagrant@ubuntu:atelier-7] vagrant up
-[vagrant@ubuntu:atelier-7] vagrant ssh ansible
-vagrant@ansible:~$ 
-```
-
 ### Création du playbook ```kernel.yaml``` pour afficher les infos détaillées du noyau sur tous les ```Target Hosts```
 
 ```yaml
