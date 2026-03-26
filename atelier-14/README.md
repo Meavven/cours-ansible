@@ -232,8 +232,7 @@ _myvars3.yaml_
 ```
 
 
-
-> Résultat du lancement du playbook myvars3 :
+> Remplacement des variables VW et BMW par Mercedes et Honda sur l'hôte target02.
 
 ```console
 [vagrant@control playbooks]$ nano myvars3.yml
@@ -247,6 +246,12 @@ EOF
 mycar: Mercedes
 mybike: Honda
 EOF
+```
+
+> Résultat du lancement du playbook myvars3 :
+
+```console
+
 [vagrant@control playbooks]$ ansible-playbook myvars3.yml 
 
 PLAY [Affichage des véhicules (External Vars)] ***********************************************************
