@@ -6,7 +6,8 @@
 
 Voici la configuration qu'il faudra installer sur chacune des quatre cibles :
 
-\# chrony.conf
+\# chrony.conf :\n
+```sh
 server 0.fr.pool.ntp.org iburst
 server 1.fr.pool.ntp.org iburst
 server 2.fr.pool.ntp.org iburst
@@ -15,6 +16,7 @@ driftfile /var/lib/chrony/drift
 makestep 1.0 3
 rtcsync
 logdir /var/log/chrony
+```
 
 - Le premier playbook chrony-01.yml utilisera les modules de gestion de paquets natifs apt, dnf et zypper et s'inspirera de la méthode « gros sabots » utilisée plus haut dans cet atelier.
 
