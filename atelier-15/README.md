@@ -86,7 +86,7 @@ _kernel_var.yml_
 ...
 ```
 
-> Résultat du lancement du playbook ```kernel_var.yaml```
+> Résultat du lancement du playbook ```kernel_var.yml```
 
 ```console
 PLAY [all] ***********************************************************************************************
@@ -109,6 +109,52 @@ ok: [suse] => {
 
 PLAY RECAP ***********************************************************************************************
 debian                     : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+rocky                      : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+suse                       : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+```
+
+> playbook packages.yml qui affiche le nombre total de paquets RPM installés sur les hôtes rocky et suse (Nous utiliserons la commande ```rpm -qa | wc -l```)
+
+_package.yml_
+
+```yaml
+--- # packages.yml
+- name: Nombre de paquets installés
+  hosts: rocky, suse
+  gather_facts: false
+
+  tasks:
+    - name: Compter les paquets RPM
+      shell: rpm -qa | wc -l
+      register: rpm_count
+      changed_when: false
+
+    - name: Afficher le nombre de paquets
+      debug:
+        msg: "Il y a {{ rpm_count.stdout }} paquets installés sur cet hôte."
+...
+```
+
+> Résultat du lancement du playbook ```package.yml```
+
+```console
+[vagrant@ansible playbooks]$ ansible-playbook packages.yml 
+
+PLAY [Nombre de paquets installés] ***********************************************************************
+
+TASK [Compter les paquets RPM] ***************************************************************************
+ok: [rocky]
+ok: [suse]
+
+TASK [Afficher le nombre de paquets] *********************************************************************
+ok: [suse] => {
+    "msg": "Il y a 504 paquets installés sur cet hôte."
+}
+ok: [rocky] => {
+    "msg": "Il y a 642 paquets installés sur cet hôte."
+}
+
+PLAY RECAP ***********************************************************************************************
 rocky                      : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 suse                       : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 ```
