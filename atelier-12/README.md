@@ -98,6 +98,8 @@ _playbook-chrony.yaml_
         state: restarted
 ```
 
-Résultat du lancement :
+> Résultat du second lancement pour vérifier l'idempotence :
 
 ![image](./atelier12-1.png)
+
+> Il n'y a aucun changement, le playbook est donc bien idempotent
