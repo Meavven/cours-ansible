@@ -269,3 +269,59 @@ target03                   : ok=1    changed=0    unreachable=0    failed=0    s
 
 [vagrant@control playbooks]$
 ```
+
+
+> playbook display_user.yml qui affiche un utilisateur et son mot de passe correspondant à l'aide des variables user et password. Ces deux variables seront saisies de manière interactive pendant l'exécution du playbook. Les valeurs par défaut seront microlinux pour user et yatahongaga pour password. Le mot de passe ne sera pas s'affichéc pendant la saisie.
+
+_display_users.yaml_
+
+```yaml
+--- # display_users.yml
+- hosts: all
+  gather_facts: false
+
+  vars_prompt:
+    - name: user
+      prompt: "Utilisateur"
+      default: "microlinux"
+      private: false
+    - name: password
+      prompt: "Mot de passe"
+      default: "yatahongaga"
+      private: true 
+
+  tasks:
+    - name: Afficher les identifiants
+      debug:
+        msg: "L'utilisateur est {{ user }} et son mot de passe est {{ password }}"
+... 
+```
+
+
+
+> Résultat du lancement du playbook myvars3 :
+
+```console
+[vagrant@control playbooks]$ ansible-playbook display_users.yml 
+Utilisateur [microlinux]: Daniel
+Mot de passe [yatahongaga]: 
+
+PLAY [all] ***********************************************************************************************
+
+TASK [Afficher les identifiants] *************************************************************************
+ok: [target01] => {
+    "msg": "L'utilisateur est Daniel et son mot de passe est EMA"
+}
+ok: [target02] => {
+    "msg": "L'utilisateur est Daniel et son mot de passe est EMA"
+}
+ok: [target03] => {
+    "msg": "L'utilisateur est Daniel et son mot de passe est EMA"
+}
+
+PLAY RECAP ***********************************************************************************************
+target01                   : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+target02                   : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+target03                   : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0  
+```
+
