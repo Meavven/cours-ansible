@@ -40,12 +40,6 @@ logdir /var/log/chrony
 
 > Lancez les 4 VM et connectez-vous à la VM ```Control Host```
 
-```console
-[vagrant@ubuntu:atelier-7] vagrant up
-[vagrant@ubuntu:atelier-7] vagrant ssh ansible
-vagrant@ansible:~$ 
-```
-
 ### Créer un playbook pour installer chrony
 
 _playbook-chrony.yaml_
