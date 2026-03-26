@@ -51,7 +51,7 @@
 
 ```console
 [vagrant@ubuntu:atelier-7] vagrant up
-[vagrant@ubuntu:atelier-7] vagrant ssh ansible
+[vagrant@ubuntu:atelier-7] vagrant ssh control
 vagrant@ansible:~$ 
 ```
 ```console
