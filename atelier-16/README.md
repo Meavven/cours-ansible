@@ -2,25 +2,13 @@
 
 ## Objectif
 
-- Écrivez successivement deux playbooks pour mettre en place la synchronisation NTP avec Chrony sur vos quatre Target Hosts sous Debian, Rocky Linux, SUSE Linux et Ubuntu. Il vous faudra identifier le nom du paquet, le service correspondant et le chemin vers le fichier de configuration par défaut pour chacune des distributions.
+Écrivez trois playbooks pour afficher des informations sur chacun des Target Hosts :
 
-Voici la configuration qu'il faudra installer sur chacune des quatre cibles :
+- pkg-info.yml pour afficher le gestionnaire de paquets utilisé
 
-\# _chrony.conf_ :
-```sh
-server 0.fr.pool.ntp.org iburst
-server 1.fr.pool.ntp.org iburst
-server 2.fr.pool.ntp.org iburst
-server 3.fr.pool.ntp.org iburst
-driftfile /var/lib/chrony/drift
-makestep 1.0 3
-rtcsync
-logdir /var/log/chrony
-```
+- python-info.yml pour afficher la version de Python installée
 
-- Le premier playbook chrony-01.yml utilisera les modules de gestion de paquets natifs apt, dnf et zypper et s'inspirera de la méthode « gros sabots » utilisée plus haut dans cet atelier.
-
-- Le deuxième playbook chrony-02.yml définira trois variables chrony_package, chrony_service et chrony_confdir et utilisera le module de gestion de paquets générique package.
+- dns-info.yml pour afficher le(s) serveur(s) DNS utilisé(s)
 
 ---
 
@@ -31,9 +19,8 @@ logdir /var/log/chrony
 ### Création du premier playbook ```chrony-01.yml```
 
 > Ansible détecte automatiquement quel outil est utilisé pour gérer les paquets (apt, dnf, yum, zypper, etc.) via le fact ansible_pkg_mgr.
-> Le playbook chrony-01.yml utilisera les modules de gestion de paquets natifs apt, dnf et zypper et s'inspirera de la méthode « gros sabots »
 
-_chrony-01.yml_
+_pkg-info.yml_
 
 ```yaml
 --- # pkg-info.yml
@@ -47,7 +34,7 @@ _chrony-01.yml_
         msg: "L'hôte {{ inventory_hostname }} utilise : {{ ansible_pkg_mgr }}"
 ```
 
-> Résultat du lancement du playbook _chrony-01.yml_ :
+> Résultat du lancement du playbook _pkg-info.yml_ :
 
 ```console
 [vagrant@ansible playbooks]$ ansible-playbook pkg-info.yml 
@@ -77,4 +64,47 @@ suse                       : ok=2    changed=0    unreachable=0    failed=0    s
 ```
 
 ---
-### Création du second playbook ```chrony-02.yml```
+### Création du second playbook ```python-info.yml```
+
+> Ce playbook affichera la version de Python installée
+
+```yaml
+--- # python-info.yml
+- hosts: all
+  gather_facts: true
+
+  tasks:
+    - name: Afficher la version complète
+      debug:
+        var: ansible_python_version
+...
+```
+
+> Résultat du lancement du playbook _python-info.yml_ :
+
+```console
+[vagrant@ansible playbooks]$ ansible-playbook python-info.yml 
+
+PLAY [all] ***********************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************
+ok: [suse]
+ok: [rocky]
+ok: [debian]
+
+TASK [Afficher la version complète] **********************************************************************
+ok: [rocky] => {
+    "ansible_python_version": "3.9.21"
+}
+ok: [debian] => {
+    "ansible_python_version": "3.11.2"
+}
+ok: [suse] => {
+    "ansible_python_version": "3.6.15"
+}
+
+PLAY RECAP ***********************************************************************************************
+debian                     : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+rocky                      : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+suse                       : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+```
