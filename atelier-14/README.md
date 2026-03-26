@@ -22,12 +22,6 @@
 
 > Lancez les 4 VM et connectez-vous à la VM ```Control Host```
 
-```console
-[vagrant@ubuntu:atelier-7] vagrant up
-[vagrant@ubuntu:atelier-7] vagrant ssh ansible
-vagrant@ansible:~$ 
-```
-
 > Création du playbook myvars1 en utilisant les extra vars pour remplacer successivement l'une et l'autre marque - puis les deux à la fois
 
 _myvars1.yaml_
