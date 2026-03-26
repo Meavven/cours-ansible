@@ -16,7 +16,7 @@
 
 > Lancez les 4 VM et connectez-vous à la VM ```Control Host```
 
-### Création du premier playbook ```chrony-01.yml```
+### Création du premier playbook ```pkg-info.yml```
 
 > Ansible détecte automatiquement quel outil est utilisé pour gérer les paquets (apt, dnf, yum, zypper, etc.) via le fact ansible_pkg_mgr.
 
