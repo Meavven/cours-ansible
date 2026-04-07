@@ -1,4 +1,4 @@
-# Atelier 6
+# Atelier 6 - Configuration de Base
 
 ## Objectif
 
