@@ -10,12 +10,12 @@ Binôme :
 | Atelier | Lien |
 | :--- | :--- |
 | `Atelier 01` | [Install Ansible](./atelier-01/Install%20Ansible.md) |
-| `Atelier 03` | [Authentification](./atelier-03/) |
-| `Atelier 06` | [Configuration de base](./atelier-06/) |
-| `Atelier 07` | [Idempotence](./atelier-07/) |
-| `Atelier 10` | [Web server](./atelier-10/) |
-| `Atelier 12` | [Les Handlers](./atelier-12/) |
-| `Atelier 14` | [Les Variables](./atelier-14/) |
-| `Atelier 16` | [Facts & Variables implicites](./atelier-16/) |
-| `Atelier 17` | [Cibles hétérogènes](./atelier-17/) |
-| `Atelier 18` | [Jinja & Templates](./atelier-18/) |
+| `Atelier 03` | [Authentification](./atelier-03/Authentification.md) |
+| `Atelier 06` | [Configuration de base](./atelier-06/Configuration%20de%20Base.md) |
+| `Atelier 07` | [Idempotence](./atelier-07/Idempotence.md) |
+| `Atelier 10` | [Web server](./atelier-10/Les%20Variables.md) |
+| `Atelier 12` | [Les Handlers](./atelier-12/Les%20Handlers.md) |
+| `Atelier 14` | [Les Variables](./atelier-14/Les%20Variables.md) |
+| `Atelier 16` | [Facts & Variables implicites](./atelier-16/Facts%20&%20Variables%20implicites.md) |
+| `Atelier 17` | [Cibles hétérogènes](./atelier-17/Cibles%20hétérogènes.md) |
+| `Atelier 18` | [Jinja & Templates](./atelier-18/Jinja%20&%20Templates.md) |
