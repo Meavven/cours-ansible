@@ -135,7 +135,7 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample
 
 ...
 
-### Création du premier playbook ```chrony-02.yml```
+### Création du second playbook ```chrony-02.yml```
 
 > Le playbook chrony-01.yml défini trois variables chrony_package, chrony_service et chrony_confdir et utilisera le module de gestion de paquets générique package
 
@@ -144,7 +144,7 @@ _chrony-02.yml_
 ```yaml
 ```
 
-> Résultat du lancement du playbook _chrony-01.yml_ :
+> Résultat du lancement du playbook _chrony-02.yml_ :
 
 ```console
 ```
