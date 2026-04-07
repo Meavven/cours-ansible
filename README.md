@@ -9,7 +9,7 @@ Binôme :
 
 | Atelier | Lien |
 | :--- | :--- |
-| `Atelier 01` | [Install Ansible](./atelier-01/) |
+| `Atelier 01` | [Install Ansible](./atelier-01/Install Ansible.md) |
 | `Atelier 03` | [Authentification](./atelier-03/) |
 | `Atelier 06` | [Configuration de base](./atelier-06/) |
 | `Atelier 07` | [Idempotence](./atelier-07/) |
