@@ -1,4 +1,4 @@
-# Atelier 16
+# Atelier 16 - Facts & Variables implicites
 
 ## Objectif
 
