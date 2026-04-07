@@ -1,4 +1,4 @@
-# Atelier 1
+# Atelier 1 - Installation de Ansible
 
 ## Objectif
 
