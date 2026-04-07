@@ -1,4 +1,4 @@
-# Atelier 17
+# Atelier 17 - Cibles hétérogènes
 
 ## Objectif
 
