@@ -142,9 +142,101 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample
 _chrony-02.yml_
 
 ```yaml
+---
+- name: Installation Chrony (Méthode Subtile)
+  hosts: all
+  become: true
+  tasks:
+    # Définition des variables spécifiques
+    - name: Configurer les paramètres pour Debian/Ubuntu
+      ansible.builtin.set_fact:
+        chrony_package: chrony
+        chrony_service: chrony
+        chrony_conf: /etc/chrony/chrony.conf
+      when: ansible_os_family == "Debian"
+
+    - name: Configurer les paramètres pour Rocky
+      ansible.builtin.set_fact:
+        chrony_package: chrony
+        chrony_service: chronyd
+        chrony_conf: /etc/chrony.conf
+      when: ansible_distribution == "Rocky"
+
+    - name: Configurer les paramètres pour openSUSE
+      ansible.builtin.set_fact:
+        chrony_package: chrony
+        chrony_service: chronyd
+        chrony_conf: /etc/chrony.conf
+      when: ansible_distribution == "openSUSE Leap"
+
+    # Tâches génériques
+    - name: Mettre à jour le cache (Debian seulement)
+      ansible.builtin.apt:
+        update_cache: true
+      when: ansible_os_family == "Debian"
+
+    - name: Installer le paquet Chrony
+      ansible.builtin.package:
+        name: "{{ chrony_package }}"
+        state: present
+
+    - name: Déployer la configuration personnalisée
+      ansible.builtin.copy:
+        dest: "{{ chrony_conf }}"
+        content: |
+          server 0.fr.pool.ntp.org iburst
+          server 1.fr.pool.ntp.org iburst
+          server 2.fr.pool.ntp.org iburst
+          server 3.fr.pool.ntp.org iburst
+          driftfile /var/lib/chrony/drift
+          makestep 1.0 3
+          rtcsync
+          logdir /var/log/chrony
+      notify: Relancer Chrony
+
+    - name: Activer et démarrer le service
+      ansible.builtin.service:
+        name: "{{ chrony_service }}"
+        state: started
+        enabled: true
+
+  handlers:
+    - name: Relancer Chrony
+      ansible.builtin.service:
+        name: "{{ chrony_service }}"
+        state: restarted
 ```
 
 > Résultat du lancement du playbook _chrony-02.yml_ :
 
 ```console
+[vagrant@ansible playbooks]$ ansible all -a "chronyc sources"
+suse | CHANGED | rc=0 >>
+MS Name/IP address         Stratum Poll Reach LastRx Last sample               
+===============================================================================
++ 82-64-45-50.subs.proxad.>     1   6   377     6   +992us[ +722us] +/-   18ms
++ 200-177-190-109.dsl.ovh.>     2   6   377     3  +2694us[+2694us] +/-   20ms
+- main.arcanite.ch              2   7   377    68  -3533us[-3796us] +/-   55ms
+* dns.freewebworld.fr           1   7   377     6   +443us[ +173us] +/-   18ms
+rocky | CHANGED | rc=0 >>
+MS Name/IP address         Stratum Poll Reach LastRx Last sample               
+===============================================================================
+- ntp.tuxfamily.net             2   7   277   123    -21ms[  -21ms] +/-   57ms
+* 164-102-58-31.static.rev>     2   7   377     7  -4421us[-4494us] +/-   19ms
+- y.ns.gin.ntt.net              2   7   377     5  -5466us[-5466us] +/-  115ms
++ meshflow.net                  2   7   377     6  +1540us[+1540us] +/-   27ms
+ubuntu | CHANGED | rc=0 >>
+MS Name/IP address         Stratum Poll Reach LastRx Last sample               
+===============================================================================
+* edge1.haeiven.fr              3   6    17    18   +884us[+1661us] +/-   22ms
+- 129.151.225.244               2   6    17    20    +40ms[  +40ms] +/-   88ms
+- web1.ciran28.fr               2   6    17    19  -1297us[-1297us] +/-   60ms
+- 82-64-45-50.subs.proxad.>     1   6    17    19    -39ms[  -39ms] +/-   56ms
+debian | CHANGED | rc=0 >>
+MS Name/IP address         Stratum Poll Reach LastRx Last sample               
+===============================================================================
+* edge1.haeiven.fr              3   6    17    20  -1036us[ -684us] +/-   23ms
+- 37.59.63.125                  2   6    17    19    +36ms[  +36ms] +/-   64ms
+- web1.ciran28.fr               2   6    17    19   +105us[ +105us] +/-   64ms
+- ciran28.fr                    3   6    17    19  +4343us[+4343us] +/-   60ms
 ```
