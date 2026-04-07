@@ -1,4 +1,4 @@
-# Atelier 18
+# Atelier 18 - Jinja & Templates
 
 ## Objectif
 
