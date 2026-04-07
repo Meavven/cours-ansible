@@ -1,4 +1,4 @@
-# Atelier 3
+# Atelier 3 - Authentification
 
 ## Objectif
 
