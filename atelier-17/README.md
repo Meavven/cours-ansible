@@ -95,7 +95,7 @@ _chrony-01.yml_
         state: restarted
 ```
 
-> Résultat du lancement du playbook _chrony-01.yml_ :
+> Verification de la configuration chrony du playbook _chrony-01.yml_ sur les VM Targets :
 
 ```console
 [vagrant@ansible playbooks]$ ansible all -a "chronyc sources"
