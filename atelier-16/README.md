@@ -20,23 +20,12 @@
 
 > Ansible détecte automatiquement quel outil est utilisé pour gérer les paquets (apt, dnf, yum, zypper, etc.) via le fact ansible_pkg_mgr.
 
-_pkg-info.yml_
+pkg-info.yml affichera le gestionnaire de paquets utilisé
 
 ```yaml
 --- # pkg-info.yml
 - name: Informations sur le gestionnaire de paquets
-  hosts: all
-  gather_facts: true
-
-  tasks:
-    - name: Afficher le gestionnaire de paquets
-      debug:
-        msg: "L'hôte {{ inventory_hostname }} utilise : {{ ansible_pkg_mgr }}"
-```
-
-> Résultat du lancement du playbook _pkg-info.yml_ :
-
-```console
+  hosts:=
 [vagrant@ansible playbooks]$ ansible-playbook pkg-info.yml 
 
 PLAY [Informations sur le gestionnaire de paquets] *******************************************************
