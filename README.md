@@ -1,5 +1,6 @@
 # Ateliers Ansible
-IMT INFRES SR 2A - Module "Infrastructure as Code" (Ansible)
+IMT INFRES-17 SR - Module __"Infrastructure as Code"__ (Ansible)
+
 Binôme :
 - Daniel BEN HAMOU
 - Andy Le Blanc
