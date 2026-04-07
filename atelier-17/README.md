@@ -137,7 +137,7 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample
 
 ### Création du second playbook ```chrony-02.yml```
 
-> Le playbook chrony-01.yml défini trois variables chrony_package, chrony_service et chrony_confdir et utilisera le module de gestion de paquets générique package
+> Le playbook chrony-02.yml défini trois variables chrony_package, chrony_service et chrony_confdir et utilisera le module de gestion de paquets générique package
 
 _chrony-02.yml_
 
@@ -207,7 +207,7 @@ _chrony-02.yml_
         state: restarted
 ```
 
-> Résultat du lancement du playbook _chrony-02.yml_ :
+> Verification de la configuration chrony du playbook _chrony-02.yml_ sur les VM Targets :
 
 ```console
 [vagrant@ansible playbooks]$ ansible all -a "chronyc sources"
