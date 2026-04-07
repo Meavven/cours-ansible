@@ -108,3 +108,46 @@ debian                     : ok=2    changed=0    unreachable=0    failed=0    s
 rocky                      : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 suse                       : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 ```
+
+> Ce playbook affichera le(s) serveur(s) DNS utilisé(s)
+
+```yaml
+--- # dns-info.yml
+
+- hosts: all
+  gather_facts: true
+
+  tasks:
+    - name: Afficher les serveurs de noms (DNS)
+      debug:
+        msg: "Les serveurs DNS de {{ inventory_hostname }} sont : {{ ansible_dns.nameservers | join(', ') }}"
+```
+
+> Résultat du lancement du playbook dns-info.yml :
+
+```console
+[vagrant@ansible playbooks]$ ansible-playbook dns-info.yml 
+
+PLAY [all] ***********************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************
+ok: [suse]
+ok: [rocky]
+ok: [debian]
+
+TASK [Afficher les serveurs de noms (DNS)] ***************************************************************
+ok: [suse] => {
+    "msg": "Les serveurs DNS de suse sont : 10.0.2.3"
+}
+ok: [rocky] => {
+    "msg": "Les serveurs DNS de rocky sont : 10.0.2.3"
+}
+ok: [debian] => {
+    "msg": "Les serveurs DNS de debian sont : 10.0.2.3"
+}
+
+PLAY RECAP ***********************************************************************************************
+debian                     : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+rocky                      : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+suse                       : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+```
