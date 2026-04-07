@@ -1,4 +1,4 @@
-# Atelier 7
+# Atelier 7 - Idempotence
 
 ## Objectif
 
