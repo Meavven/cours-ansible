@@ -16,6 +16,6 @@ Binôme :
 | `Atelier 10` | [Web server](./atelier-10/Les%20Variables.md) |
 | `Atelier 12` | [Les Handlers](./atelier-12/Les%20Handlers.md) |
 | `Atelier 14` | [Les Variables](./atelier-14/Les%20Variables.md) |
-| `Atelier 16` | [Facts & Variables implicites](./atelier-16/Facts%20&%20Variables%20implicites.md) |
+| `Atelier 16` | [Facts & Variables implicites](./atelier-16/%20Facts%20%26%20Variables%20implicites.md) |
 | `Atelier 17` | [Cibles hétérogènes](./atelier-17/Cibles%20hétérogènes.md) |
 | `Atelier 18` | [Jinja & Templates](./atelier-18/Jinja%20&%20Templates.md) |
