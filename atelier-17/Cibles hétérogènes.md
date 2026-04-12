@@ -145,7 +145,38 @@ Après l'exécution de l'un ou l'autre playbook, la synchronisation est vérifi�
 ```bash
 ansible all -a "chronyc sources"
 ```
+> Verification de la configuration chrony du playbook _chrony-02.yml_ sur les VM Targets :
 
+```console
+[vagrant@ansible playbooks]$ ansible all -a "chronyc sources"
+suse | CHANGED | rc=0 >>
+MS Name/IP address         Stratum Poll Reach LastRx Last sample               
+===============================================================================
++ 82-64-45-50.subs.proxad.>     1   6   377     6   +992us[ +722us] +/-   18ms
++ 200-177-190-109.dsl.ovh.>     2   6   377     3  +2694us[+2694us] +/-   20ms
+- main.arcanite.ch              2   7   377    68  -3533us[-3796us] +/-   55ms
+* dns.freewebworld.fr           1   7   377     6   +443us[ +173us] +/-   18ms
+rocky | CHANGED | rc=0 >>
+MS Name/IP address         Stratum Poll Reach LastRx Last sample               
+===============================================================================
+- ntp.tuxfamily.net             2   7   277   123    -21ms[  -21ms] +/-   57ms
+* 164-102-58-31.static.rev>     2   7   377     7  -4421us[-4494us] +/-   19ms
+- y.ns.gin.ntt.net              2   7   377     5  -5466us[-5466us] +/-  115ms
++ meshflow.net                  2   7   377     6  +1540us[+1540us] +/-   27ms
+ubuntu | CHANGED | rc=0 >>
+MS Name/IP address         Stratum Poll Reach LastRx Last sample               
+===============================================================================
+* edge1.haeiven.fr              3   6    17    18   +884us[+1661us] +/-   22ms
+- 129.151.225.244               2   6    17    20    +40ms[  +40ms] +/-   88ms
+- web1.ciran28.fr               2   6    17    19  -1297us[-1297us] +/-   60ms
+- 82-64-45-50.subs.proxad.>     1   6    17    19    -39ms[  -39ms] +/-   56ms
+debian | CHANGED | rc=0 >>
+MS Name/IP address         Stratum Poll Reach LastRx Last sample               
+===============================================================================
+* edge1.haeiven.fr              3   6    17    20  -1036us[ -684us] +/-   23ms
+- 37.59.63.125                  2   6    17    19    +36ms[  +36ms] +/-   64ms
+- web1.ciran28.fr               2   6    17    19   +105us[ +105us] +/-   64ms
+- ciran28.fr                    3   6    17    19  +4343us[+4343us] +/-   60ms
 **Points d'attention identifiés :**
 1. **Noms de services** : `chrony` sur les bases Debian, `chronyd` sur RedHat/SUSE.
 2. **Chemins de configuration** : `/etc/chrony/chrony.conf` sur Debian/Ubuntu contre `/etc/chrony.conf` sur les autres.
