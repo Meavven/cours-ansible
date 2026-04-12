@@ -144,7 +144,7 @@ _package.yml_
         msg: "Il y a {{ rpm_count.stdout }} paquets installés sur cet hôte."
 ...
 ```
-**Note technique :** L'utilisation du module `shell` est ici obligatoire (à la place du module `command`) car la commande contient un "pipe" (`|`).
+L'utilisation du module `shell` est ici obligatoire (à la place du module `command`) car la commande contient un "pipe" (`|`).
 
 > Résultat du lancement du playbook ```package.yml```
 
