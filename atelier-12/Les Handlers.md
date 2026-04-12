@@ -87,7 +87,7 @@ _playbook-chrony.yaml_
         enabled: true
 
   handlers:
-    - name: Redemarrer chronyd
+    - name: Reboot chronyd
       service:
         name: chronyd
         state: restarted
@@ -95,9 +95,15 @@ _playbook-chrony.yaml_
 
 > Voyons plus en détail ce que fait ce playbook
 
-En bonne pratique, la première tâche "Mise a jour du cache des paquets", comme son nom l'indique, rafraîchi les informations du cache des packages de l'outil d'installation pour ensuite en seconde tâche installer ```chrony```.
+- En bonne pratique, la première tâche "Mise a jour du cache des paquets", comme son nom l'indique, rafraîchi les informations du cache des packages de l'outil d'installation pour ensuite en seconde tâche installer ```chrony```.
 
-Une fois celui-ci installé, la tâche qui suit, "Mise en place de la configuration", injecte avec le paramètre "copy" notre configuration chrony dans le fichier ```/etc/chrony.conf``` de la VM en précisant bien les drotis sur le fichier, le owner avec son groupe (ici root). Une fois injecté, en fin de tâche, le programme affiche un message "Reboot chronyd". A la fin de la dernière tâche, le service de chronyd est bien démarré est en mode "enable" pour chaque démarrage de la VM.
+- Une fois celui-ci installé, la tâche qui suit, "Mise en place de la configuration", injecte avec le paramètre "copy" notre configuration chrony dans le fichier ```/etc/chrony.conf``` de la VM en précisant bien les drotis sur le fichier, le owner avec son groupe (ici root). 
+
+- Une fois injecté, s'il y a bien eu une modification appliquée sur la VM lors de la phase d'injection, alors le "handler" est appelé par le paramètre "notify: Reboot chronyd". 
+
+- A la fin de la dernière tâche, le service de chronyd est confirmé comme bien démarré est en mode "enable" pour chaque démarrage de la VM. 
+
+- Le Handler ici aura fait office de "post-configuration", en executant son bout de code lorsqu'il est appelé.
 
 
 
@@ -105,4 +111,4 @@ Une fois celui-ci installé, la tâche qui suit, "Mise en place de la configurat
 
 ![image](./atelier12-1.png)
 
-> On n'observe aucun changement, votre playbook est donc bien idempotent !
+> On n'observe aucune différence, votre playbook est donc bien idempotent !
