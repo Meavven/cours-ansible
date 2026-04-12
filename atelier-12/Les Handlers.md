@@ -38,14 +38,15 @@ logdir /var/log/chrony
 
 ## Challenge
 
-> Lancez les 4 VM et connectez-vous à la VM ```Control Host```
+> Comme habituellement, commencez par lancer vos 4 VM et connectez-vous à votre VM de ```Control Host```
 
 ### Créer un playbook pour installer chrony
 
+Voici le résultat de notre objectif que nous allons détailler juste après
+
 _playbook-chrony.yaml_
 
-```yaml
-  GNU nano 5.6.1                                   chrony.yml                                             
+```yaml                                             
 --- # chrony.yml
 - hosts: all
   become: true
@@ -53,16 +54,16 @@ _playbook-chrony.yaml_
   tasks:
     - name: Mise a jour du cache des paquets
       dnf:
-    update_cache: yes
+        update_cache: yes
 
     - name: Installation du paquet chrony
       dnf:
-    name: chrony
+        name: chrony
         state: present
 
     - name: Mise en place de la configuration personnalisée
       copy:
-    dest: /etc/chrony.conf
+        dest: /etc/chrony.conf
         owner: root
         group: root
         mode: '0644'
@@ -77,23 +78,31 @@ _playbook-chrony.yaml_
           makestep 1.0 3
           rtcsync
           logdir /var/log/chrony
-      notify: Redemarrer chronyd
+      notify: Reboot chronyd
 
     - name: le service chronyd est demarre et active
       service:
-    name: chronyd
+        name: chronyd
         state: started
         enabled: true
 
   handlers:
     - name: Redemarrer chronyd
       service:
-    name: chronyd
+        name: chronyd
         state: restarted
 ```
 
-> Résultat du second lancement pour vérifier l'idempotence :
+> Voyons plus en détail ce que fait ce playbook
+
+En bonne pratique, la première tâche "Mise a jour du cache des paquets", comme son nom l'indique, rafraîchi les informations du cache des packages de l'outil d'installation pour ensuite en seconde tâche installer ```chrony```.
+
+Une fois celui-ci installé, la tâche qui suit, "Mise en place de la configuration", injecte avec le paramètre "copy" notre configuration chrony dans le fichier ```/etc/chrony.conf``` de la VM en précisant bien les drotis sur le fichier, le owner avec son groupe (ici root). Une fois injecté, en fin de tâche, le programme affiche un message "Reboot chronyd". A la fin de la dernière tâche, le service de chronyd est bien démarré est en mode "enable" pour chaque démarrage de la VM.
+
+
+
+> Afin de verifier l'idempotence. Vous pouvez lancer deux fois de manière consécutive le playbook et comparer les résultats :
 
 ![image](./atelier12-1.png)
 
-> Il n'y a aucun changement, le playbook est donc bien idempotent
+> On n'observe aucun changement, votre playbook est donc bien idempotent !
