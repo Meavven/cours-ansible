@@ -14,9 +14,9 @@
 
 ## Challenge
 
-> Lancez les 4 VM et connectez-vous à la VM ```Control Host```
+> Lancez avant tous vos 4 VM et connectez-vous à la VM de ```Control Host```
 
-> Création des trois playbook pour les VM Debian, Rocky et SUSE
+> Voici la création de nos trois playbook pour les VM Debian, Rocky et SUSE que nous allons voir en détails :
 
 _playbook-apache-debian.yaml_
 ```console
@@ -28,16 +28,16 @@ _playbook-apache-debian.yaml_
 
     - name: Update package information
       apt:
-    update_cache: true
+        update_cache: true
         cache_valid_time: 3600
 
     - name: Install Apache
       apt:
-    name: apache2
+        name: apache2
 
     - name: Install custom web page
       copy:
-    dest: /var/www/html/index.html
+        dest: /var/www/html/index.html
         mode: 0644
         content: |
           <!doctype html>
@@ -53,7 +53,7 @@ _playbook-apache-debian.yaml_
 
     - name: Start & enable Apache
       service:
-    name: apache2
+        name: apache2
         state: started
         enabled: true
 ```
@@ -69,15 +69,15 @@ _playbook-apache-rocky.yaml_
 
     - name: Update package information
       dnf:
-    update_cache: true
+        update_cache: true
 
     - name: Install Apache (httpd)
       dnf:
-    name: httpd
+        name: httpd
 
     - name: Install custom web page
       copy:
-    dest: /var/www/html/index.html
+        dest: /var/www/html/index.html
         mode: 0644
         content: |
           <!doctype html>
@@ -93,7 +93,7 @@ _playbook-apache-rocky.yaml_
 
     - name: Start & enable Apache
       service:
-    name: httpd
+        name: httpd
         state: started
         enabled: true
 ```
@@ -109,12 +109,12 @@ _playbook-apache-suse.yaml_
 
     - name: Install Apache
       zypper:
-    name: apache2
+        name: apache2
         state: present
 
     - name: Install custom web page
       copy:
-    dest: /srv/www/htdocs/index.html
+        dest: /srv/www/htdocs/index.html
         mode: '0644'
         content: |
           <!doctype html>
@@ -130,7 +130,7 @@ _playbook-apache-suse.yaml_
 
     - name: Start & enable Apache
       service:
-    name: apache2
+        name: apache2
         state: started
         enabled: true
 ```
