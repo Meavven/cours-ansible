@@ -21,6 +21,7 @@
 > Ansible détecte automatiquement quel outil est utilisé pour gérer les paquets (apt, dnf, yum, zypper, etc.) via le fact ansible_pkg_mgr.
 
 pkg-info.yml affichera le gestionnaire de paquets utilisé
+Ansible identifie dynamiquement l'outil de gestion de paquets (apt, dnf, zypper, etc.) via la variable `ansible_pkg_mgr`.
 
 ```yaml
 --- # pkg-info.yml
@@ -55,7 +56,7 @@ suse                       : ok=2    changed=0    unreachable=0    failed=0    s
 ---
 ### Création du second playbook ```python-info.yml```
 
-> Ce playbook affichera la version de Python installée
+> Ce playbook utilise `ansible_python_version` pour vérifier l'interpréteur Python utilisé par Ansible sur les nœuds distants.
 
 ```yaml
 --- # python-info.yml
@@ -98,7 +99,8 @@ rocky                      : ok=2    changed=0    unreachable=0    failed=0    s
 suse                       : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 ```
 
-> Ce playbook affichera le(s) serveur(s) DNS utilisé(s)
+> Les faits collectés incluent souvent des structures complexes (dictionnaires ou listes). Ici, nous accédons aux serveurs de noms via `ansible_dns.nameservers` et utilisons un filtre Jinja2 (`join`) pour la mise en forme.
+
 
 ```yaml
 --- # dns-info.yml
