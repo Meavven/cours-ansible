@@ -169,11 +169,6 @@ PLAY RECAP *********************************************************************
 rocky                      : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 suse                       : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
-## Synthèse des points clés
-* **Register** : Indispensable pour récupérer le résultat d'une tâche et l'utiliser plus tard dans le playbook.
-* **Debug (msg vs var)** : 
-    * `msg` : Permet de créer une phrase personnalisée en combinant texte et variables.
-    * `var` : Affiche directement le contenu d'une variable (idéal pour le débuggage rapide).
-* **Command vs Shell** : Le module `command` est plus sécurisé, mais le module `shell` est nécessaire pour les opérations complexes (redirections, pipes, variables d'environnement).
+
 ```
 
