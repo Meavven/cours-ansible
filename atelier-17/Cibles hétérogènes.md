@@ -7,7 +7,7 @@ L'objectif est d'uniformiser la configuration du service de synchronisation temp
 ---
 
 ## 1. Playbook `chrony-01.yml` : Méthode "Gros Sabots"
-Cette méthode consiste à multiplier les tâches en utilisant les modules natifs (`apt`, `dnf`, `zypper`) et en appliquant des conditions `when` strictes pour chaque distribution.
+Cette méthode consiste à multiplier les tâches en utilisant les modules natifs (`apt`, `dnf`, `zypper`) en utilisant le paramètre conditionnel `when` pour distringuer les tâches à chaque distribution.
 
 **Fichier : `chrony-01.yml`**
 ```yaml
@@ -109,8 +109,8 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample
 ```
 ---
 
-## 2. Playbook `chrony-02.yml` : Méthode "Subtile" (Générique)
-Cette approche est plus élégante et maintenable. Elle utilise `set_fact` pour définir les variables spécifiques à chaque OS en début de play, puis utilise des modules génériques (`package`) pour les tâches d'exécution.
+## 2. Playbook `chrony-02.yml` : Méthode Générique
+Cette autre méthode utilise `set_fact` pour définir les variables spécifiques à chaque OS en début de playbook, puis utilise des modules génériques (`package`) pour les tâches d'exécution.
 
 **Fichier : `chrony-02.yml`**
 ```yaml
