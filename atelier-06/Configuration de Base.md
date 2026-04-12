@@ -42,12 +42,12 @@
 
 Commencez par pré-configurer votre environnement en vous basant sur les quatres points suivant de l'atelier-03 :
 
-  > lancement des quatres VM avec vagrant  
-  > Mise à jour du fichier hosts de la VM ```Control Host``` avec les hostname des trois VM targets  
-  > Installation de ansible sur la VM ```Control Host```  
-  > Ajout des clefs SSH des VM pour pouvoir ping les trois targets à partir de la VM ```Control Host``` avec le mode ping de ansible  
+  > - lancement des quatres VM avec vagrant  
+  > -  Mise à jour du fichier hosts de la VM ```Control Host``` avec les hostname des trois VM targets  
+  > - Installation de ansible sur la VM ```Control Host```  
+  > - Ajout des clefs SSH des VM pour pouvoir ping les trois targets à partir de la VM ```Control Host``` avec le mode ping de ansible  
 
-> Connectez-vous à la Control Host et verifiez la pré-configuration avec la commande suivante sollicitant le mode _ping_ de ansible :
+Connectez-vous à la VM ```control``` qui gère Ansible et verifiez la pré-configuration avec la commande suivante sollicitant le mode _ping_ de ansible :
 
 ```console
 [vagrant@ubuntu:atelier-7] vagrant up
@@ -64,9 +64,9 @@ vagrant@control:~$ ansible all -i target01,target02,target3 -m ping
 
 ### Création de ansible.cfg
 
-> Créer un dossier monprojet dans le répertoire du home avec dedans un fichier ansible.cfg  
+> Créez un dossier ```~/monprojet``` dans le répertoire du home avec dedans un fichier ```ansible.cfg```  
 
-> Verifier que le fichier de configuration est bien pris en compte avec la commande suivante :  
+> Verifier que c'est bien votre nouveau fichier de configuration ```ansible.cfg``` de votre repertoire qui est pris en compte en vous servant de la commande suivante qui affichera le chemin du fichier ansible.cfg sur lequel ansible se réfère :  
 
 ```console
 vagrant@control:~$ ansible --version
@@ -80,7 +80,7 @@ vagrant@control:~$ ansible --version
 
 ### Pré-configuration de l'inventory
 
-> Spécifier dans "_ansible.cfg_" un chemin vers un futur fichier inventory  
+> Spécifiez dans votre fichier "_ansible.cfg_" un chemin vers un futur fichier inventory  
 
 ```txt
 [defaults]
@@ -88,7 +88,7 @@ inventory = ./hosts
 ```
 ### Activation des logs
 
-> Ajouter dans "_ansible.cfg_" un chemin vers un futur fichier de log  
+> Ajoutez à présent dans "_ansible.cfg_" un chemin vers un futur fichier de log  
 
 ```txt
 [defaults]
@@ -96,20 +96,23 @@ inventory = ./hosts
 log_path = ~/journal/ansible.log
 ```
 
-> Créer le chemin ~/journal qui contiendra le fichier de log. Le fichier se créera de lui-même lorsqu'un log sera généré :  
+> Créez le chemin ```~/journal/``` qui contiendra le fichier de log. Le fichier se créera de lui-même lorsqu'un log sera généré  
 
 ```console
 vagrant@control:~$ mkdir ~/journal
 ```
 
-Pour tester la création automatique du fichier de log, on peut générer un simple log en réexecutant un ping de l'inventaire comme précédemment  
+Afin de tester la création automatique du fichier de log, générez un simple log en éxecutant un ping d'une des VM avec le module "ping" de Ansible vue précédemment  
 
 
 ### Configuration de l'inventory
 
-> Création et configuration du fichier inventory nommé "_hosts_"
-    - Ajout d'un groupe "_testlab_" contenant les trois VM target
-    - Spécification du nom d'utilisateur _vagrant_ des VM target pour la connexion
+> Créez et configurez un nouveau fichier inventory nommé "_hosts_" avec la configuration plus bas qui remplira les tâches suivantes :
+    - Ajout d'un groupe "_testlab_" contenant nos trois VM target
+    - Spécification du nom d'utilisateur _vagrant_ des VM target pour une connexion
+    - Spécification d'un interpreteur (python3)
+
+__Configuration__ du fichier ```hosts``` :
 
 ```txt
 [testlab]
@@ -122,11 +125,14 @@ ansible_python_interpreter=/usr/bin/python3
 ansible_user=vagrant
 ```
 
-> Vérification du bon fonctionnement de la configuration avec un ping de l'inventaire (ici nommé "hosts") :  
+> Vérifions à présent le bon fonctionnement de la configuration avec un ping de nos VM via l'inventaire qui contient les informations nécessaires à leurs connexions (fichier inventaire ici nommé "hosts") :  
 
 ```console
 vagrant@control:~$ ansible hosts -m ping
 ```
+
+Vous devriez obtenir un résultat similaire à ci-dessous 
+
 ```txt
 target02 | SUCCESS => {
     "changed": false,
@@ -142,12 +148,13 @@ target03 | SUCCESS => {
 }
 ```
 
-> Verification optionnel pour confirmer que les trois hosts sont bien dans le registre de l'inventaire (fichier "_hosts"_) :  
+> Une verification optionnelle est possible pour confirmer que les trois hosts sont bien dans le registre de l'inventaire avec la commande suivante :  
 
 ```console
 vagrant@control:~$ ansible all --list-hosts
 ```
 
+> Si tout est opérationnel, la commande doit vous retourner la liste de vos trois VM Targets.
 ```txt
   hosts (3):
     target01
@@ -157,19 +164,17 @@ vagrant@control:~$ ansible all --list-hosts
 
 ### Elévation des privilèges de "vagrant"
 
-L'objectif est d'élever les privilèges de l'utilsiateur ```vagrant``` pour la VM "control" afin qu'elle puisse élargir ses droits d'execution de commandes sur les VM target
+L'objectif à présent est d'élever les privilèges de l'utilisateur ```vagrant``` des VM Targets depuis la VM "control" afin qu'elle puisse élargir ses droits d'execution de commandes sur les VM targets
 
-> Ajouter le paramètre "_ansible_become=yes_" dans les variables du fichier inventory "_hosts_" :
+> Ajoutez le paramètre "_ansible_become=yes_" dans les variables du fichier inventory "_hosts_" :
 
 ```txt
-[testlab]
-...
-
 [testlab:vars]
 ...
 ansible_become=yes
 ```
-Verification de l'élevation des privilèges en executant une commande pour afficher le fichier ```/etc/shadow``` des VM target
+
+Vous pouvez verifier l'élevation des privilèges en executant une commande pour afficher le fichier ```/etc/shadow``` des VM target
 
 ```console
 vagrant@control:~$ ansible all -a "head -n 1 /etc/shadow"
@@ -177,6 +182,6 @@ vagrant@control:~$ ansible all -a "head -n 1 /etc/shadow"
 
 ![image](./atelier06-3.png)
 
-
+Notre élévation de privilèges est désormais fonctionnelle.
 
 
