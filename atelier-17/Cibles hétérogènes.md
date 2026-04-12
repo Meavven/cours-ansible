@@ -7,7 +7,7 @@ L'objectif est d'uniformiser la configuration du service de synchronisation temp
 ---
 
 ## 1. Playbook `chrony-01.yml` : Méthode "Gros Sabots"
-Cette approche consiste à multiplier les tâches en utilisant les modules natifs (`apt`, `dnf`, `zypper`) et en appliquant des conditions `when` strictes pour chaque distribution.
+Cette méthode consiste à multiplier les tâches en utilisant les modules natifs (`apt`, `dnf`, `zypper`) et en appliquant des conditions `when` strictes pour chaque distribution.
 
 **Fichier : `chrony-01.yml`**
 ```yaml
