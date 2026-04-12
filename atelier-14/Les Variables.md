@@ -28,8 +28,11 @@ Il utilisera les extra vars pour remplacer successivement l'une et l'autre marqu
 
 _myvars1.yaml_
 
+Ce premier exercice utilise le bloc `vars` au sein du play. Ces variables sont remplacées par l'utilisation des **extra vars** en ligne de commande.
+
+**Fichier : `myvars1.yml`**
 ```yaml
---- # myvars1.yml
+---
 - name: Affichage des véhicules (Play Vars)
   hosts: all
   gather_facts: false
@@ -42,6 +45,18 @@ _myvars1.yaml_
       debug:
         msg: "Ma voiture : {{ mycar }}, Ma moto : {{ mybike }}"
 ...
+```
+
+**Exécutions et surcharge :**
+```bash
+# Exécution standard
+ansible-playbook myvars1.yml
+
+# Remplacement d'une variable
+ansible-playbook myvars1.yml -e "mycar=Ferrari"
+
+# Remplacement des deux variables
+ansible-playbook myvars1.yml -e "mycar=Tesla mybike=Ducati"
 ```
 
 > Résultat du lancement du playbook myvars1
@@ -109,8 +124,9 @@ target03                   : ok=1    changed=0    unreachable=0    failed=0    s
 ```
 
 ---
-### Playbook myvars2.yml
+### 2. Playbook `myvars2.yml` : Définition via `set_fact`
 Il fera essentiellement la même chose que myvars1.yml, mais en utilisant une tâche avec set_fact pour définir les deux variables.
+Ici, les variables sont définies dynamiquement durant l'exécution d'une tâche. Bien que `set_fact` ait une priorité élevée, les **extra vars** peuvent toujours les écraser.
 
 _myvars2.yaml_
 
@@ -213,13 +229,17 @@ target03                   : ok=2    changed=0    unreachable=0    failed=0    s
 ```
 
 ---
-### Playbook myvars3.yml 
-Il affichera le contenu des deux variables mycar et mybike mais sans les définir, définissant avant d'être exécuté les variables VW et BMW comme valeurs par défaut pour mycar et mybike pour tous les hôtes, en utilisant l'endroit approprié.
+### 3. Playbook `myvars3.yml` : Variables d'inventaire (Group & Host Vars)
 
-_myvars3.yaml_
+Cet exercice démontre la séparation des données et du code en utilisant l'arborescence des répertoires `group_vars` (global) et `host_vars` (spécifique à un hôte).
 
+Le playbook affichera le contenu des deux variables mycar et mybike mais sans les définir, définissant avant d'être exécuté les variables VW et BMW comme valeurs par défaut pour mycar et mybike pour tous les hôtes, en utilisant l'endroit approprié.
+
+**Fichier : `myvars3.yml`**
+
+**Fichier : `myvars3.yml`**
 ```yaml
--- # myvars3.yml
+---
 - name: Affichage des véhicules (External Vars)
   hosts: all
   gather_facts: false
@@ -227,8 +247,26 @@ _myvars3.yaml_
   tasks:
     - name: Afficher les véhicules
       debug:
-    msg: "Ma voiture : {{ mycar }}, Ma moto : {{ mybike }}"
+        msg: "Ma voiture : {{ mycar }}, Ma moto : {{ mybike }}"
 ...
+```
+
+**Exemple de Configuration de l'environnement :**
+
+```bash
+# Définition des valeurs par défaut pour tous les hôtes
+mkdir -p group_vars
+cat <<EOF > group_vars/all.yml
+mycar: VW
+mybike: BMW
+EOF
+
+# Définition d'une exception pour target02
+mkdir -p host_vars
+cat <<EOF > host_vars/target02.yml
+mycar: Mercedes
+mybike: Honda
+EOF
 ```
 
 
@@ -277,10 +315,12 @@ target03                   : ok=1    changed=0    unreachable=0    failed=0    s
 
 
 ---
-### playbook display_user.yml
-Il affichera un utilisateur et son mot de passe correspondant à l'aide des variables user et password. Ces deux variables seront saisies de manière interactive pendant l'exécution du playbook. Les valeurs par défaut seront microlinux pour user et yatahongaga pour password. Le mot de passe ne sera pas s'affichéc pendant la saisie.
+## 4. Playbook `display_user.yml` : Saisie interactive
+Utilisation de `vars_prompt` pour demander des informations à l'utilisateur lors de l'exécution, avec masquage du mot de passe (paramètre `private: true`).
 
-_display_users.yaml_
+le playbook affichera un utilisateur et son mot de passe correspondant à l'aide des variables user et password. Ces deux variables seront saisies de manière interactive pendant l'exécution du playbook. Les valeurs par défaut seront microlinux pour user et yatahongaga pour password. Le mot de passe ne sera pas s'affichéc pendant la saisie.
+
+**Fichier : `display_user.yml`**
 
 ```yaml
 --- # display_users.yml
