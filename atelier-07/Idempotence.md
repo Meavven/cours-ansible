@@ -16,19 +16,20 @@
 
 ## Challenge
 
-> Lancez les 4 VM et connectez-vous à la VM ```Control Host```
+> Commencez par lancer vos 4 VM et connectez-vous à votre VM ```Control Host```
 
 ### Installer / Désinstaller des packages sur les VM depuis le Control Host
-> Installez successivement les 3 packages avec une commande _ad hoc_ depuis la VM ```Control Host``` :
+> Installez successivement les 3 packages ```tree```, ```git``` et ```nmap``` avec une commande _ad hoc_ suivante éxecuté depuis la VM ```Control Host``` :
+Inutile de se connecter aux 3 VM Targets une à une pour tout installer, Ansible propose son propre module pour installer des packages à distance sur d'autres VM :
 
 ```console
-vagrant@ansible:~$ ansible all -m package -a "name=tree,git,nmap state=present)"
+vagrant@ansible:~$ ansible all -m package -a "name=tree,git,nmap state=present"
 ```
 > Le paramètre ```state=present``` permet ici de préciser que nous voulons "installer" les packages mentionnés. Les désinstaller aurait nécessité la valeur de ```state=absent```.
 > Si on ne précise pas ce paramètre, il sera par défaut avec la valeur ```state=present```
-> 
+
 ```console
-[vagrant@ansible ema]$ ansible all -m package -a "name=tree,git,nmap"
+[vagrant@ansible ema]$ ansible all -m package -a "name=tree,git,nmap state=present"
 suse | SUCCESS => {
     "changed": false,
     "name": [
@@ -55,8 +56,8 @@ rocky | SUCCESS => {
 
 Les trois packages se sont bien installés. On peut désormais les désinstaller.
 
-> Nous pouvons tester d'executer deux fois successivement la commande de désinstallation afin de confirmer que la désinstallati on s'est terminée avec succès.
-> Le terminal nous retourne qu'il n'y a eu aucun changement étant donné que les packages ont bien été désinstallés lors de la première execution de commande.
+> Nous pouvons tester d'executer deux fois successivement la commande de désinstallation afin de confirmer que la désinstallation s'est terminée avec succès.
+> Le shell nous retourne qu'il n'y a eu aucun changement avec ```"changed: false``` étant donné que les packages ont bien été désinstallés lors de la première execution de commande. Il n'a donc plus rien a désinstaller.
 
 ```console
 [vagrant@ansible]~$ ansible all -m package -a "name=tree,git,nmap state=absent"
@@ -82,11 +83,31 @@ rocky | SUCCESS => {
 }
 ```
 
-Les trois packages se sont bel et bien déinstallation. On le confirme par l'information de "changed: false". Aucun changement n'a été executé.
+### Copie de fichiers sur une liste de hosts
 
-### Copie de fichier sur une liste de hosts
+Créez à présent un fichier "test3.txt" et copiez-le sur toutes les VM en executant (depuis la VM de ```Control Host```) la commande ansible utilisant le mode "copy" :
 
-Créez à présent un fichier "test3.txt" et copiez-le sur toutes les VM en executant (depuis la VM ```Control Host```) la commande ansible utilisant le mode "copy" :
+```console
+[vagrant@ansible]~$ ansible all -m copy -a "src=/etc/fstab dest=/tmp/test3.txt"
+debian | CHANGED => {
+    "changed": true,
+    "path": "/tmp/test3.txt",
+    "state": "absent"
+}
+rocky | CHANGED => {
+    "changed": true,
+    "path": "/tmp/test3.txt",
+    "state": "absent"
+}
+suse | CHANGED => {
+    "changed": true,
+    "path": "/tmp/test3.txt",
+    "state": "absent"
+}
+```
+
+La fichier s'est bien copié sur nos trois VM. 
+Nous pouvons le vérifier en réexcutant la commande de copy pour verifier qu'elle nous retourne bien ```"changed": false``` :
 
 ```console
 [vagrant@ansible]~$ ansible all -m copy -a "src=/etc/fstab dest=/tmp/test3.txt"
@@ -132,26 +153,10 @@ rocky | SUCCESS => {
 }
 ```
 
-La fichier s'est bien copié sur nos trois VM. 
-> Nous pouvons le supprimer en utilisant le mode "file" :
+
+> Nous pouvons à présent supprimer le fichier en utilisant le mode "file" :
 
 ```console
-[vagrant@ansible]~$ ansible all -m copy -a "src=/etc/fstab dest=/tmp/test3.txt"
-debian | CHANGED => {
-    "changed": true,
-    "path": "/tmp/test3.txt",
-    "state": "absent"
-}
-rocky | CHANGED => {
-    "changed": true,
-    "path": "/tmp/test3.txt",
-    "state": "absent"
-}
-suse | CHANGED => {
-    "changed": true,
-    "path": "/tmp/test3.txt",
-    "state": "absent"
-}
 [vagrant@ansible ema]$ ansible all -m file -a "path=/tmp/test3.txt state=absent"
 debian | SUCCESS => {
     "changed": false,
