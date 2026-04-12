@@ -99,8 +99,8 @@ rocky                      : ok=2    changed=0    unreachable=0    failed=0    s
 suse                       : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 ```
 
-> Les faits collectés incluent souvent des structures complexes (dictionnaires ou listes). Ici, nous accédons aux serveurs de noms via `ansible_dns.nameservers` et utilisons un filtre Jinja2 (`join`) pour la mise en forme.
 
+> Ici, nous accédons aux serveurs DNS via `ansible_dns.nameservers` et utilisons un filtre Jinja2 `join` pour la mise en forme.
 
 ```yaml
 --- # dns-info.yml
