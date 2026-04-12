@@ -136,3 +136,9 @@ _playbook-apache-suse.yaml_
 ```
 
 ![image](./atelier10-3.png)
+
+Ce qui différencie les playbook est leur adaptabilité à leur distribution linux assignée. Par exemple, la distribution Debian utilise l'outil d'installation "apt" contrairement à rocky qui utilise "dnf" et SUSE qui utilise "zypper". Le nom de service de apache vari également. Il se nomme "apache2" avec Debian et SUSE contraiement avec Rocky où il se nomme "httpd".
+
+Mise à part ces 2 détails de nommage, les trois playbook suivent tous la même structure de paramétrage en 3 phases, à commencer par l'installation du service web d'Apache, suivi de l'injection d'un code html dans un nouveau fichier index html grâce au paramètre "copy", et enfin la dernière phase redémarrant le service apache2 avec le paramètre "service" afin qu'il prenne en compte le nouveau fichier injecté.
+
+A l'excepetion du playbook de SUSE qui utilise l'outil d'installation zypper, les autres ont besoin de rafraichir les informations de leur outil de package en amont des phases d'installation du service d'Apache avec le paramètre "update_cache: true"
