@@ -70,7 +70,43 @@ Cette approche consiste à multiplier les tâches en utilisant les modules natif
         state: restarted
 ...
 ```
+> Verification de la configuration chrony du playbook _chrony-01.yml_ sur les VM Targets :
 
+```console
+[vagrant@ansible playbooks]$ ansible all -a "chronyc sources"
+debian | CHANGED | rc=0 >>
+MS Name/IP address         Stratum Poll Reach LastRx Last sample               
+===============================================================================
++ 27.ip-51-68-44.eu             4   6   377    14   -421us[ -421us] +/-   25ms
+* neel.ch                       1   6   377    15   +333us[ -654us] +/-   22ms
+- ns3161189.ip-51-91-67.eu      3   6   377    13  +2600us[+2600us] +/-   75ms
++ ciran28.fr                    3   6   377    16  -1210us[-2194us] +/-   62ms
+suse | CHANGED | rc=0 >>
+MS Name/IP address         Stratum Poll Reach LastRx Last sample               
+===============================================================================
++ 82-64-45-50.subs.proxad.>     1   6   377    14  -2512us[-2512us] +/-   22ms
++ 200-177-190-109.dsl.ovh.>     2   6   377    14  +1676us[+1676us] +/-   18ms
++ main.arcanite.ch              2   6   377    14   -134us[ -134us] +/-   55ms
+* dns.freewebworld.fr           1   6   377    15  -3457us[-4675us] +/-   21ms
+rocky | CHANGED | rc=0 >>
+MS Name/IP address         Stratum Poll Reach LastRx Last sample               
+===============================================================================
+- ntp.tuxfamily.net             2   7    15     6  -5625us[-5625us] +/-   40ms
+* 164-102-58-31.static.rev>     2   6   377    15  -4743us[-5649us] +/-   18ms
+- y.ns.gin.ntt.net              2   6   377    15    -68us[  -68us] +/-  100ms
++ meshflow.net                  2   6   377    17  -1606us[-2512us] +/-   30ms
+ubuntu | CHANGED | rc=0 >>
+MS Name/IP address         Stratum Poll Reach LastRx Last sample               
+===============================================================================
+? prod-ntp-3.ntp4.ps5.cano>     0   6     0     -     +0ns[   +0ns] +/-    0ns
+- alphyn.canonical.com          2   6   175    10    +38ms[  +38ms] +/-  118ms
++ prod-ntp-4.ntp1.ps5.cano>     2   6   377    13  -2125us[-2125us] +/-   24ms
++ prod-ntp-3.ntp1.ps5.cano>     2   6   377    13  -1356us[-1356us] +/-   25ms
++ 82-65-248-56.subs.proxad>     1   6   377    14    +23ms[  +24ms] +/-   58ms
+* time.cloudflare.com           3   6   377    13  +3599us[+4910us] +/-   22ms
++ edge1.haeiven.fr              3   6   377    14   -787us[ +521us] +/-   21ms
++ silas.dioptre.fr              2   6   377    16   -833us[ +473us] +/-   49ms
+```
 ---
 
 ## 2. Playbook `chrony-02.yml` : Méthode "Subtile" (Générique)
