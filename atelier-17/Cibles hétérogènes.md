@@ -1,4 +1,4 @@
-```markdown
+
 # Atelier 17 - Cibles hétérogènes (NTP/Chrony)
 
 ## Objectif
