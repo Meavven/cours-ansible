@@ -101,16 +101,16 @@ vagrant@ubuntu~$ exit
 
 ## Challenge n°2
 
-Reprenez le début de la procédure du challenge n°1 et poir recréez une VM et mettre à jour les repository.
+Tout d'abord, reprenez le début de la procédure du challenge n°1 pour recréez une VM et mettre à jour ses repository.
 
-Ajout de PPA Ansible (Personal Package Archive)
+A présent nous pouvons ajoutr les PPA Ansible (Personal Package Archive) qui, comme son nom l'indique, sont des packages spécifique à Ansible :
 
 ```console
 vagrant@ubuntu~$ sudo apt-add-repository --yes --update ppa:ansible/ansible
 ```
 ![image](./atelier01-chall2-1.png)
 
-
+Vous devrez trouver comme ci-dessous les packages suviants :
 ```console
 vagrant@ubuntu~$ apt-cache search --names-only ansible
     ...
@@ -120,11 +120,13 @@ vagrant@ubuntu~$ apt-cache search --names-only ansible
 ```
 ![image](./atelier01-chall2-2.png)
 
+Ces packages vont nous permettre d'installer ansible avec APT :
 
 ```console
 vagrant@ubuntu~$ sudo apt install ansible
 ```
 
+Vous pouvez verifier que son installation a été réalisée avec succès en testant une commande simple tel que celle affichant sa version. Ici nous avons la version 2.17.14
 ```console
 vagrant@ubuntu~$ ansible --version
 
@@ -132,9 +134,9 @@ vagrant@ubuntu~$ ansible --version
     ...
 ```
 
-On peut remarquer que la version de ansible ici est moins récente que celle du package du repository standard utilisé dans le challenge précédent.
+Note : On peut remarquer que la version de ansible ici est moins récente que celle du package du repository standard utilisé dans le challenge précédent.
 
-Déconnectez-vous et supprimez de nouveau la VM.
+Déconnectez-vous et supprimez la VM.
 
 ```console
 vagrant@ubuntu~$ exit
@@ -145,7 +147,7 @@ vagrant@ubuntu~$ exit
 
 ## Challenge n°3
 
-Lancez avant tout, lancez une VM rocky et connectez-vous
+Commencez par lancez une VM rocky et connectez-vous :
 
 ```console
 [user@sandbox:atelier-1] vagrant up rocky
@@ -169,13 +171,13 @@ vagrant@rocky~$ source ~/.venv/ansible/bin/activate
 ![image](./atelier01-chall3-2.png)
 
 
-A présent, mettez à jour pip
+A présent, mettez à jour pip avec la commande suivante :
 
 ```console
 (ansible) $ pip install --upgrade pip
 ```
 
-Ensuite installez ansible avec pip et verifiez l'installation
+Vous pouvez désormais installer ansible avec pip et verifiez son installation en affichant sa version
 
 ```console
 (ansible) $ pip install ansible
@@ -187,4 +189,5 @@ Ensuite installez ansible avec pip et verifiez l'installation
 ![image](./atelier01-chall3-3.png)
 
 
-L'environnement virtuel peut être désactivé avec la commande "```$ deactivate```"
+Tout s'est bien installer. L'environnement virtuel est prêt à l'utilisation !
+Vous pouvez désactivé l'environnement virtuel avec la commande "```$ deactivate```"
