@@ -16,7 +16,7 @@
 
 ---
 ### Paybook ```kernel.yaml``` 
-Il affichera les infos détaillées du noyau sur tous les ```Target Hosts```
+Ce playbook récupère les informations du noyau via la commande `uname -a` et affiche une chaîne de caractères personnalisée.
 
 _kernel.yml_
 
@@ -36,6 +36,10 @@ _kernel.yml_
       debug:
     msg: "Le noyau de cette machine est : {{ uname_cmd.stdout }}"
 ...
+**Note technique :** * `register: uname_cmd` : Stocke toute la sortie de la commande (stdout, stderr, code retour) dans une variable.
+* `changed_when: false` : Empêche Ansible de considérer cette tâche comme un changement ("changed"), puisqu'il s'agit d'une simple lecture d'information.
+
+
 ```
 
 > Résultat du lancement du playbook ```kernel.yml```
@@ -69,7 +73,7 @@ suse                       : ok=2    changed=0    unreachable=0    failed=0    s
 
 ---
 ### Principe similaire
-Il utilisera cette fois-ci le paramètre ```var``` du module ```debug```
+Alternative au playbook précédent, utilisant le paramètre `var` du module `debug` pour afficher directement le contenu de la variable sans mise en forme textuelle.
 
 _kernel_var.yml_
 
@@ -119,7 +123,7 @@ suse                       : ok=2    changed=0    unreachable=0    failed=0    s
 
 ---
 ### Playbook packages.yml
-Il affichera le nombre total de paquets RPM installés sur les hôtes rocky et suse (Nous utiliserons la commande ```rpm -qa | wc -l```)
+Ce playbook compte le nombre de paquets RPM installés sur les distributions basées sur RPM (Rocky Linux et OpenSUSE).
 
 _package.yml_
 
@@ -140,6 +144,7 @@ _package.yml_
         msg: "Il y a {{ rpm_count.stdout }} paquets installés sur cet hôte."
 ...
 ```
+**Note technique :** L'utilisation du module `shell` est ici obligatoire (à la place du module `command`) car la commande contient un "pipe" (`|`).
 
 > Résultat du lancement du playbook ```package.yml```
 
@@ -163,5 +168,12 @@ ok: [rocky] => {
 PLAY RECAP ***********************************************************************************************
 rocky                      : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 suse                       : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+## Synthèse des points clés
+* **Register** : Indispensable pour récupérer le résultat d'une tâche et l'utiliser plus tard dans le playbook.
+* **Debug (msg vs var)** : 
+    * `msg` : Permet de créer une phrase personnalisée en combinant texte et variables.
+    * `var` : Affiche directement le contenu d'une variable (idéal pour le débuggage rapide).
+* **Command vs Shell** : Le module `command` est plus sécurisé, mais le module `shell` est nécessaire pour les opérations complexes (redirections, pipes, variables d'environnement).
 ```
 
