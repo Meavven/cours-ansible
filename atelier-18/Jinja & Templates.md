@@ -17,6 +17,8 @@ Nous commençons par démarrer l'infrastructure et nous positionner dans le rép
 # Démarrage des VM
 vagrant up
 
+![image](./vagrant-up.png)
+
 # Connexion au serveur Ansible
 vagrant ssh ansible
 
@@ -114,6 +116,8 @@ chrony_confdir: /etc/chrony
 ...
 ```
 
+![image](./list-vars-4distrib.png)
+
 ## 5. Configuration du template Jinja2
 Le template source est placé dans le dossier templates. Il inclut une variable Jinja2 dans l'en-tête pour identifier dynamiquement le chemin de configuration.
 **Chemin :** ansible/projets/ema/playbooks/templates/chrony.conf.j2
@@ -130,10 +134,9 @@ rtcsync
 logdir /var/log/chrony
 ```
 ## 6. Exécution et Validation
-Une fois le playbook exécuté, nous vérifions le bon déploiement sur une machine cible (Debian).
-bash
-Sortie du serveur Ansible
-exit
+Une fois le playbook exécuté, nous vérifions le bon déploiement sur une machine cible (Par exemple la VM Debian).
+
+![image](./run-playbook.png)
 
 Connexion à la VM cible
 vagrant ssh debian
@@ -141,5 +144,6 @@ vagrant ssh debian
 Vérification du contenu du fichier généré
 cat /etc/chrony/chrony.conf
 
-
 Le fichier contient bien les paramètres définis et l'en-tête a été correctement interprété par le moteur Jinja2.
+
+![image](./check-chrony-conf.png)
