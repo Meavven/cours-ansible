@@ -111,4 +111,4 @@ _playbook-chrony.yaml_
 
 ![image](./atelier12-1.png)
 
-> On n'observe aucune différence, votre playbook est donc bien idempotent !
+On n'observe aucun changement, votre playbook est donc bien idempotent !
